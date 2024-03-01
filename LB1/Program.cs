@@ -1,4 +1,4 @@
-﻿using LB1_library;
+﻿using PersonLibrary;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,6 +20,7 @@ namespace LB1
         {
             Person person = new Person("Ф", "Ф", 0, Gender.Male);
 
+            //TODO: duplication
             while (true)
             {
                 try
@@ -41,6 +42,7 @@ namespace LB1
                 }
             }
 
+            //TODO: duplication
             while (true)
             {
                 try
@@ -62,6 +64,7 @@ namespace LB1
                 }
             }
 
+            //TODO: duplication
             while (true)
             {
                 try
@@ -84,6 +87,7 @@ namespace LB1
                 }
             }
 
+            //TODO: duplication
             Console.WriteLine();
             Console.WriteLine("Ввдите пол:\n 0 - Мужской;\n 1 - Женский");
             int genderByte = Convert.ToInt32(Console.ReadLine());
@@ -121,6 +125,7 @@ namespace LB1
                 case 0:
                     firstName = maleFirstNames[rndMaleFirstNames];
                     lastName = _lastName[rndLastName];
+                    //TODO: duplication
                     age = random.Next(0, 100);
                     gender = (Gender)rndGender;
                     break;
@@ -128,6 +133,7 @@ namespace LB1
                 case 1:
                     firstName = maleFirstNames[rndMaleFirstNames];
                     lastName = _lastName[rndLastName] + "а";
+                    //TODO: duplication
                     age = random.Next(0, 100);
                     gender = (Gender)rndGender;
                     break;
@@ -136,6 +142,7 @@ namespace LB1
             return new Person(firstName, lastName, age, gender);
         }
 
+        //TODO: XML
         static void Main(string[] args)
         {
             Person person1 = new Person("Андрей", "Пупкин", 20, Gender.Male);
@@ -158,36 +165,37 @@ namespace LB1
             personList2.AddElement(person5);
             personList2.AddElement(person6);
 
-            //Console.ReadKey();
-            //Console.WriteLine($"Список №1\n{personList1.GetPersonList()}");
-            //Console.ReadKey();
-            //Console.WriteLine($"Список №2\n{personList2.GetPersonList()}");
+            Console.ReadKey();
+            Console.WriteLine($"Список №1\n{personList1.GetPersonList()}");
+            Console.ReadKey();
+            Console.WriteLine($"Список №2\n{personList2.GetPersonList()}");
 
-            //Console.ReadKey();
-            //personList1.AddElement(person7);
-            //Console.WriteLine($"Список №1 после добавленя нового человека\n{personList1.GetPersonList()}");
+            Console.ReadKey();
+            personList1.AddElement(person7);
+            Console.WriteLine($"Список №1 после добавленя нового человека\n" +
+                $"{personList1.GetPersonList()}");
 
-            //Console.ReadKey();
-            //personList2.AddElement(personList1.SearchElementByIndex(1));
-            //Console.WriteLine($"Список №1 после копирования\n{personList1.GetPersonList()}");
-            //Console.WriteLine($"Список №2 после копирования\n{personList2.GetPersonList()}");
+            Console.ReadKey();
+            personList2.AddElement(personList1.SearchElementByIndex(1));
+            Console.WriteLine($"Список №1 после копирования\n{personList1.GetPersonList()}");
+            Console.WriteLine($"Список №2 после копирования\n{personList2.GetPersonList()}");
 
-            //Console.ReadKey();
-            //personList1.DeleteElementByIndex(1);
-            //Console.WriteLine($"Список №1 после удаления\n{personList1.GetPersonList()}");
-            //Console.WriteLine($"Список №2 после удаления\n{personList2.GetPersonList()}");
+            Console.ReadKey();
+            personList1.DeleteElementByIndex(1);
+            Console.WriteLine($"Список №1 после удаления\n{personList1.GetPersonList()}");
+            Console.WriteLine($"Список №2 после удаления\n{personList2.GetPersonList()}");
 
-            //Console.ReadKey();
-            //personList2.DeleteAllElement();
-            //Console.WriteLine($"Список №2 после очистки\n{personList2.GetPersonList()}");
+            Console.ReadKey();
+            personList2.DeleteAllElement();
+            Console.WriteLine($"Список №2 после очистки\n{personList2.GetPersonList()}");
 
             Console.ReadKey();
             Person person8 = CreatePersonFromConsole();
             person8.PrintInfo();
 
-            //Console.ReadKey();
-            //Person person9 = GetRandomPerson();
-            //person9.PrintInfo();
+            Console.ReadKey();
+            Person person9 = GetRandomPerson();
+            person9.PrintInfo();
         }
     }
 }

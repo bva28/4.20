@@ -1,18 +1,19 @@
-﻿using LB1_library;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LB1_library
+namespace PersonLibrary
 {
     /// <summary>
     /// PersonList.
     /// </summary>
     public class PersonList
     {
+        //TODO: XML
+        //TODO: encapsulation
         public List<Person> List = new List<Person>();
 
         /// <summary>

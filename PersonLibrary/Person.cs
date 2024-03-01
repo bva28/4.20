@@ -3,8 +3,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
-namespace LB1_library
+namespace PersonLibrary
 {
+    //TODO: extract
     /// <summary>
     /// Gender. 
     /// </summary>
@@ -19,6 +20,8 @@ namespace LB1_library
     /// </summary>
     public class Person
     {
+        //TODO: RSDN
+        //TODO: XML
         private string firstName;
         private string lastName;
         private int age;
@@ -85,6 +88,7 @@ namespace LB1_library
             }
         }
 
+        //TODO: autoproperty
         /// <summary>
         /// Поле Gender.
         /// </summary>
@@ -117,9 +121,9 @@ namespace LB1_library
         {
             return $"Имя: {FirstName}, Фмилия: {LastName}," +
                    $"Возраст: {Age}, Пол:{Gender}\n";
-
         }
 
+        //TODO: remove
         /// <summary>
         /// Вывод информации о человеке в консоль, для проверки.
         /// </summary>
@@ -164,6 +168,7 @@ namespace LB1_library
                 (hasEnglishFirstName && hasEnglishLastName);
         }
 
+        //TODO: encapsulation
         /// <summary>
         /// Преобразует регистр строки, 
         /// делая первую букву заглавной, а остальные - строчными.
