@@ -13,5 +13,5 @@ if ((hours > 0) && (minutes > 0) && (minutes < 59))
 }
 else
 {
-    Console.WriteLine("Значение введено некорректно22");
+    Console.WriteLine("Значение введено некорректно222");
 }
