@@ -12,8 +12,7 @@ namespace PersonLibrary
     /// </summary>
     public class PersonList
     {
-        //TODO: XML+
-        //TODO: encapsulation+
+        //TODO: RSDN
         /// <summary>
         /// Список объектов типа Person.
         /// </summary>
@@ -80,7 +79,6 @@ namespace PersonLibrary
         /// </summary>
         public void DeleteAllElement()
         {
-            //List.RemoveAt(List.Count - 1);
             List.Clear();
         }
 

@@ -11,9 +11,6 @@ namespace PersonLibrary
     /// </summary>
     public class Person
     {
-        //TODO: RSDN +
-        //TODO: XML +
-
         /// <summary>
         /// Поле FirstName.
         /// </summary>
@@ -95,15 +92,10 @@ namespace PersonLibrary
             }
         }
 
-        //TODO: autoproperty+
         /// <summary>
         /// Поле Gender.
         /// </summary>
         public Gender Gender { get; set; }
-        //{
-        //    get { return gender; }
-        //    set { gender = value; }
-        //}
 
         /// <summary>
         /// Конструктор класса Person.
@@ -130,18 +122,6 @@ namespace PersonLibrary
                    $" Возраст: {Age}, Пол:{Gender}\n";
         }
 
-        //TODO: remove +
-        /// <summary>
-        /// Вывод информации о человеке в консоль, для проверки.
-        /// </summary>
-        //public void PrintInfo()
-        //{
-        //    Console.WriteLine($"Name: {FirstName}");
-        //    Console.WriteLine($"LastName: {LastName}");
-        //    Console.WriteLine($"Age: {Age}");
-        //    Console.WriteLine($"Gender: {Gender}");
-        //}
-
         /// <summary>
         /// Проверяет, содержит ли слово только один язык (русский или английский).
         /// </summary>
@@ -150,6 +130,7 @@ namespace PersonLibrary
         /// в противном случае — значение false.</returns>
         private bool IsSingleLanguage(string word)
         {
+            //TODO: duplication
             bool hasRussian = Regex.IsMatch(word, @"[^а-яА-Я -]");
             bool hasEnglish = Regex.IsMatch(word, @"[^a-zA-Z -]");
 
@@ -165,6 +146,7 @@ namespace PersonLibrary
         /// в противном случае — значение false.</returns>
         private bool IsNameLanguageMatched(string firstName, string lastName)
         {
+            //TODO: duplication
             bool hasRussianFirstName = Regex.IsMatch(firstName, @"[^а-яА-Я -]");
             bool hasRussianLastName = Regex.IsMatch(lastName, @"[^а-яА-Я -]");
 
@@ -175,7 +157,6 @@ namespace PersonLibrary
                 (hasEnglishFirstName && hasEnglishLastName);
         }
 
-        //TODO: encapsulation +
         /// <summary>
         /// Преобразует регистр строки, 
         /// делая первую букву заглавной, а остальные - строчными.
@@ -195,7 +176,8 @@ namespace PersonLibrary
                     if (!string.IsNullOrEmpty(part))
                     {
                         string lowerCase = part.ToLower();
-                        result += char.ToUpper(lowerCase[0]) + lowerCase.Substring(1) + " ";
+                        result += char.ToUpper(lowerCase[0]) 
+                                + lowerCase.Substring(1) + " ";
                     }
                 }
 

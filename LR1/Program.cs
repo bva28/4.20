@@ -20,7 +20,6 @@ namespace LB1
         {
             Person person = new Person("Ф", "Ф", 0, Gender.Male);
 
-            //TODO: duplication+
             List<Action> actions = new List<Action>()
             {
                 () =>
@@ -105,13 +104,9 @@ namespace LB1
             Console.WriteLine();
             Random random = new Random();
 
-            string firstName = "";
-            string lastName = "";
-            int age = 0;
-            Gender gender = Gender.Female;
-
             string[] maleFirstNames = { "Егор", "Сергей", "Юрий", "Александр", "Николай" };
             string[] femaleFirstNames = { "Дарья", "Софья", "Екатерина", "Мария", "Виктория" };
+            //TODO: RSDN
             string[] _lastName = { "Андреев", "Гаврилов", "Ельцин", "Захаров", "Исаев" };
 
             int rndGender = random.Next(0, Enum.GetNames(typeof(Gender)).Length);
@@ -119,31 +114,31 @@ namespace LB1
             int rndMaleFirstNames = random.Next(0, maleFirstNames.Length);
             int rndFemaleFirstNames = random.Next(0, femaleFirstNames.Length);
             int rndLastName = random.Next(0, _lastName.Length);
-            age = random.Next(0, 100);
-
+            
+            string firstName = "";
+            string lastName = "";
+            Gender gender = Gender.Female;
             switch (rndGender)
             {
                 case 0:
                     firstName = maleFirstNames[rndMaleFirstNames];
                     lastName = _lastName[rndLastName];
-                    //TODO: duplication +
-                    //age = random.Next(0, 100);
                     gender = (Gender)rndGender;
                     break;
 
                 case 1:
                     firstName = maleFirstNames[rndMaleFirstNames];
                     lastName = _lastName[rndLastName] + "а";
-                    //TODO: duplication +
-                    //age = random.Next(0, 100);
                     gender = (Gender)rndGender;
                     break;
             }
 
+            //TODO: duplication
+            int age = random.Next(0, 100);
+            
             return new Person(firstName, lastName, age, gender);
         }
 
-        //TODO: XML +
         /// <summary>
         /// Main.
         /// </summary>
