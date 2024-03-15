@@ -20,80 +20,80 @@ namespace LB1
         {
             Person person = new Person("Ф", "Ф", 0, Gender.Male);
 
-            //TODO: duplication
-            while (true)
+            //TODO: duplication+
+            List<Action> actions = new List<Action>()
             {
-                try
+                () =>
                 {
                     Console.WriteLine("FirstName:");
                     person.FirstName = Console.ReadLine();
-                    break;
-                }
-                catch (ArgumentException e)
-                {
-                    Console.WriteLine();
-                    Console.WriteLine(e.Message);
-                }
-                catch (FormatException)
-                {
-                    Console.WriteLine();
-                    Console.WriteLine("Ошибка формата. " +
-                        "Пожалуйста, введите корректное значение для имени.");
-                }
-            }
-
-            //TODO: duplication
-            while (true)
-            {
-                try
+                },
+                () =>
                 {
                     Console.WriteLine("LastName:");
                     person.LastName = Console.ReadLine();
-                    break;
-                }
-                catch (ArgumentException e)
+                },
+                () =>
                 {
-                    Console.WriteLine();
-                    Console.WriteLine(e.Message);
-                }
-                catch (FormatException)
+                    Console.Write("Введите возраст: ");
+                    person.Age = Convert.ToInt32(Console.ReadLine());
+
+                },
+                () =>
                 {
-                    Console.WriteLine();
-                    Console.WriteLine("Ошибка формата. " +
-                        "Пожалуйста, введите корректное значение для имени.");
+                    Console.WriteLine("Ввдите пол:\n 0 - Мужской;\n 1 - Женский");
+                    int genderByte = Convert.ToInt32(Console.ReadLine());
+
+                    switch (genderByte)
+                    {
+                        case 0:
+                            person.Gender = Gender.Female;
+                            break;
+                        case 1:
+                            person.Gender = Gender.Male;
+                            break;
+                        default:
+                            throw new ArgumentException
+                            ("Некорректный ввод пола.\n" +
+                            "Ввдите пол:\n 0 - Мужской;\n 1 - Женский");
+                    }
                 }
+            };
+
+            foreach (Action action in actions)
+            {
+                ActionHandler(action);
             }
 
-            //TODO: duplication
+            return person;
+        }
+
+        /// <summary>
+        /// Метод обработки возможных исключений.
+        /// </summary>
+        /// <param name="action">Действие.</param>
+        public static void ActionHandler(Action action)
+        {
             while (true)
             {
                 try
                 {
-                    Console.Write("Введите возраст: ");
-                    Console.WriteLine();
-                    person.Age = Convert.ToInt32(Console.ReadLine());
-                    break;
+                    action.Invoke();
+                    return;
                 }
-                catch (ArgumentException e)
+
+                catch (Exception ex)
                 {
-                    Console.WriteLine();
-                    Console.WriteLine(e.Message);
-                }
-                catch (FormatException)
-                {
-                    Console.WriteLine();
-                    Console.WriteLine("Ошибка формата. " +
-                        "Пожалуйста, введите корректное значение для возраста.");
+                    var exceptionType = ex.GetType();
+                    if (exceptionType == typeof(FormatException) ||
+                        exceptionType == typeof(ArgumentOutOfRangeException) ||
+                        exceptionType == typeof(ArgumentException))
+
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                 }
             }
-
-            //TODO: duplication
-            Console.WriteLine();
-            Console.WriteLine("Ввдите пол:\n 0 - Мужской;\n 1 - Женский");
-            int genderByte = Convert.ToInt32(Console.ReadLine());
-            person.Gender = (Gender)genderByte;
-
-            return person;
         }
 
         /// <summary>
@@ -119,22 +119,23 @@ namespace LB1
             int rndMaleFirstNames = random.Next(0, maleFirstNames.Length);
             int rndFemaleFirstNames = random.Next(0, femaleFirstNames.Length);
             int rndLastName = random.Next(0, _lastName.Length);
+            age = random.Next(0, 100);
 
             switch (rndGender)
             {
                 case 0:
                     firstName = maleFirstNames[rndMaleFirstNames];
                     lastName = _lastName[rndLastName];
-                    //TODO: duplication
-                    age = random.Next(0, 100);
+                    //TODO: duplication +
+                    //age = random.Next(0, 100);
                     gender = (Gender)rndGender;
                     break;
 
                 case 1:
                     firstName = maleFirstNames[rndMaleFirstNames];
                     lastName = _lastName[rndLastName] + "а";
-                    //TODO: duplication
-                    age = random.Next(0, 100);
+                    //TODO: duplication +
+                    //age = random.Next(0, 100);
                     gender = (Gender)rndGender;
                     break;
             }
@@ -142,7 +143,11 @@ namespace LB1
             return new Person(firstName, lastName, age, gender);
         }
 
-        //TODO: XML
+        //TODO: XML +
+        /// <summary>
+        /// Main.
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             Person person1 = new Person("Андрей", "Пупкин", 20, Gender.Male);
@@ -191,11 +196,12 @@ namespace LB1
 
             Console.ReadKey();
             Person person8 = CreatePersonFromConsole();
-            person8.PrintInfo();
+            Console.WriteLine($"{person8.GetPersonInfo()}");
+
 
             Console.ReadKey();
             Person person9 = GetRandomPerson();
-            person9.PrintInfo();
+            Console.WriteLine($"{person9.GetPersonInfo()}");
         }
     }
 }

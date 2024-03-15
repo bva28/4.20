@@ -12,9 +12,12 @@ namespace PersonLibrary
     /// </summary>
     public class PersonList
     {
-        //TODO: XML
-        //TODO: encapsulation
-        public List<Person> List = new List<Person>();
+        //TODO: XML+
+        //TODO: encapsulation+
+        /// <summary>
+        /// Список объектов типа Person.
+        /// </summary>
+        private List<Person> List = new List<Person>();
 
         /// <summary>
         /// Добавляет элемент типа Person в список.
@@ -106,3 +109,4 @@ namespace PersonLibrary
         }
     }
 }
+

@@ -1,38 +1,45 @@
 ﻿using System;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
 namespace PersonLibrary
 {
-    //TODO: extract
-    /// <summary>
-    /// Gender. 
-    /// </summary>
-    public enum Gender
-    {
-        Male,
-        Female
-    }
-
     /// <summary>
     /// Person. 
     /// </summary>
     public class Person
     {
-        //TODO: RSDN
-        //TODO: XML
-        private string firstName;
-        private string lastName;
-        private int age;
-        private Gender gender;
+        //TODO: RSDN +
+        //TODO: XML +
+
+        /// <summary>
+        /// Поле FirstName.
+        /// </summary>
+        private string _firstName;
+
+        /// <summary>
+        /// Поле LastName. 
+        /// </summary>
+        private string _lastName;
+
+        /// <summary>
+        /// Поле Age. 
+        /// </summary>
+        private int _age;
+
+        /// <summary>
+        /// Поле Gender. 
+        /// </summary>
+        private Gender _gender;
 
         /// <summary>
         /// Поле FirstName. 
         /// </summary>
         public string FirstName
         {
-            get { return firstName; }
+            get { return _firstName; }
             set
             {
                 ConvertRegister(value);
@@ -41,7 +48,7 @@ namespace PersonLibrary
                     throw new ArgumentException("Имя должно быть написано одним языком.");
                 }
 
-                firstName = ConvertRegister(value);
+                _firstName = ConvertRegister(value);
             }
         }
 
@@ -50,7 +57,7 @@ namespace PersonLibrary
         /// </summary>
         public string LastName
         {
-            get { return lastName; }
+            get { return _lastName; }
             set
             {
                 if (IsSingleLanguage(value))
@@ -62,7 +69,7 @@ namespace PersonLibrary
                     throw new ArgumentException("Язык фамилии должен совпадать с языком имени.");
                 }
 
-                lastName = ConvertRegister(value);
+                _lastName = ConvertRegister(value);
             }
         }
 
@@ -71,7 +78,7 @@ namespace PersonLibrary
         /// </summary>
         public int Age
         {
-            get { return age; }
+            get { return _age; }
             set
             {
                 if (value < 0)
@@ -84,19 +91,19 @@ namespace PersonLibrary
                     throw new ArgumentException("Бессмертен");
                 }
 
-                age = value;
+                _age = value;
             }
         }
 
-        //TODO: autoproperty
+        //TODO: autoproperty+
         /// <summary>
         /// Поле Gender.
         /// </summary>
-        public Gender Gender
-        {
-            get { return gender; }
-            set { gender = value; }
-        }
+        public Gender Gender { get; set; }
+        //{
+        //    get { return gender; }
+        //    set { gender = value; }
+        //}
 
         /// <summary>
         /// Конструктор класса Person.
@@ -120,20 +127,20 @@ namespace PersonLibrary
         public string GetPersonInfo()
         {
             return $"Имя: {FirstName}, Фмилия: {LastName}," +
-                   $"Возраст: {Age}, Пол:{Gender}\n";
+                   $" Возраст: {Age}, Пол:{Gender}\n";
         }
 
-        //TODO: remove
+        //TODO: remove +
         /// <summary>
         /// Вывод информации о человеке в консоль, для проверки.
         /// </summary>
-        public void PrintInfo()
-        {
-            Console.WriteLine($"Name: {FirstName}");
-            Console.WriteLine($"LastName: {LastName}");
-            Console.WriteLine($"Age: {Age}");
-            Console.WriteLine($"Gender: {Gender}");
-        }
+        //public void PrintInfo()
+        //{
+        //    Console.WriteLine($"Name: {FirstName}");
+        //    Console.WriteLine($"LastName: {LastName}");
+        //    Console.WriteLine($"Age: {Age}");
+        //    Console.WriteLine($"Gender: {Gender}");
+        //}
 
         /// <summary>
         /// Проверяет, содержит ли слово только один язык (русский или английский).
@@ -168,14 +175,14 @@ namespace PersonLibrary
                 (hasEnglishFirstName && hasEnglishLastName);
         }
 
-        //TODO: encapsulation
+        //TODO: encapsulation +
         /// <summary>
         /// Преобразует регистр строки, 
         /// делая первую букву заглавной, а остальные - строчными.
         /// </summary>
         /// <param name="input">Входная строка для преобразования.</param>
         /// <returns>Преобразованная строка.</returns>
-        public static string ConvertRegister(string input)
+        private static string ConvertRegister(string input)
         {
             if (input.Contains('-') || input.Contains(' '))
             {
