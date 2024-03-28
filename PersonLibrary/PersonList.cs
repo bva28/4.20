@@ -12,7 +12,7 @@ namespace PersonLibrary
     /// </summary>
     public class PersonList
     {
-        //TODO: RSDN
+        //TODO: RSDN+
         /// <summary>
         /// Список объектов типа Person.
         /// </summary>

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace LB1
+namespace LR1
 {
     /// <summary>
     /// Program.
@@ -18,44 +18,56 @@ namespace LB1
         /// <returns>Экземпляр класса Person.</returns>
         public static Person CreatePersonFromConsole()
         {
-            Person person = new Person("Ф", "Ф", 0, Gender.Male);
+            Console.WriteLine("Введите данные о персоне:");
+
+            Person person = new Person();
 
             List<Action> actions = new List<Action>()
             {
                 () =>
                 {
-                    Console.WriteLine("FirstName:");
+                    Console.WriteLine("Имя:");
                     person.FirstName = Console.ReadLine();
                 },
                 () =>
                 {
-                    Console.WriteLine("LastName:");
+                    Console.WriteLine("Фамилия:");
                     person.LastName = Console.ReadLine();
                 },
                 () =>
                 {
-                    Console.Write("Введите возраст: ");
-                    person.Age = Convert.ToInt32(Console.ReadLine());
-
-                },
+					Console.Write("Возраст: ");
+						if (!int.TryParse(Console.ReadLine(), out int age))
+						{
+							throw new FormatException
+							($"Возраст - это число");
+						}
+						person.Age = age;
+				},
                 () =>
                 {
                     Console.WriteLine("Ввдите пол:\n 0 - Мужской;\n 1 - Женский");
-                    int genderByte = Convert.ToInt32(Console.ReadLine());
 
-                    switch (genderByte)
+                    if (!int.TryParse(Console.ReadLine(), out int genderByte))
                     {
-                        case 0:
-                            person.Gender = Gender.Female;
-                            break;
-                        case 1:
-                            person.Gender = Gender.Male;
-                            break;
-                        default:
-                            throw new ArgumentException
-                            ("Некорректный ввод пола.\n" +
-                            "Ввдите пол:\n 0 - Мужской;\n 1 - Женский");
+                        throw new FormatException
+                        ($"Это число, попробуйте снова");
                     }
+                    else
+                    {
+						switch (genderByte)
+						{
+							case 0:
+								person.Gender = Gender.Male;
+								break;
+							case 1:
+								person.Gender = Gender.Female;
+								break;
+							default:
+								throw new ArgumentException
+								("Некорректный ввод пола");
+						}
+					}
                 }
             };
 
@@ -73,27 +85,25 @@ namespace LB1
         /// <param name="action">Действие.</param>
         public static void ActionHandler(Action action)
         {
-            while (true)
-            {
-                try
-                {
-                    action.Invoke();
-                    return;
-                }
+			while (true)
+			{
+				try
+				{
+					action.Invoke();
+					return;
+				}
 
-                catch (Exception ex)
-                {
-                    var exceptionType = ex.GetType();
-                    if (exceptionType == typeof(FormatException) ||
-                        exceptionType == typeof(ArgumentOutOfRangeException) ||
-                        exceptionType == typeof(ArgumentException))
-
-                    {
-                        Console.WriteLine(ex.Message);
-                    }
-                }
-            }
-        }
+				catch (Exception ex)
+				{
+					var exceptionType = ex.GetType();
+					if (exceptionType == typeof(FormatException) ||
+						exceptionType == typeof(ArgumentException))
+					{
+						Console.WriteLine(ex.Message);
+					}
+				}
+			}
+		}
 
         /// <summary>
         /// Генерирует случайное экземпляр типа Person
@@ -106,14 +116,14 @@ namespace LB1
 
             string[] maleFirstNames = { "Егор", "Сергей", "Юрий", "Александр", "Николай" };
             string[] femaleFirstNames = { "Дарья", "Софья", "Екатерина", "Мария", "Виктория" };
-            //TODO: RSDN
-            string[] _lastName = { "Андреев", "Гаврилов", "Ельцин", "Захаров", "Исаев" };
+            //TODO: RSDN +
+            string[] lastNameList = { "Андреев", "Гаврилов", "Ельцин", "Захаров", "Исаев" };
 
             int rndGender = random.Next(0, Enum.GetNames(typeof(Gender)).Length);
 
             int rndMaleFirstNames = random.Next(0, maleFirstNames.Length);
             int rndFemaleFirstNames = random.Next(0, femaleFirstNames.Length);
-            int rndLastName = random.Next(0, _lastName.Length);
+            int rndLastName = random.Next(0, lastNameList.Length);
             
             string firstName = "";
             string lastName = "";
@@ -122,19 +132,19 @@ namespace LB1
             {
                 case 0:
                     firstName = maleFirstNames[rndMaleFirstNames];
-                    lastName = _lastName[rndLastName];
+                    lastName = lastNameList[rndLastName];
                     gender = (Gender)rndGender;
                     break;
 
                 case 1:
                     firstName = maleFirstNames[rndMaleFirstNames];
-                    lastName = _lastName[rndLastName] + "а";
+                    lastName = lastNameList[rndLastName] + "а";
                     gender = (Gender)rndGender;
                     break;
             }
 
-            //TODO: duplication
-            int age = random.Next(0, 100);
+            //TODO: duplication+
+            int age = random.Next(Person.MinAge, Person.MaxAge);
             
             return new Person(firstName, lastName, age, gender);
         }
@@ -165,38 +175,37 @@ namespace LB1
             personList2.AddElement(person5);
             personList2.AddElement(person6);
 
-            Console.ReadKey();
-            Console.WriteLine($"Список №1\n{personList1.GetPersonList()}");
-            Console.ReadKey();
-            Console.WriteLine($"Список №2\n{personList2.GetPersonList()}");
+            //Console.ReadKey();
+            //Console.WriteLine($"Список №1\n{personList1.GetPersonList()}");
+            //Console.ReadKey();
+            //Console.WriteLine($"Список №2\n{personList2.GetPersonList()}");
 
-            Console.ReadKey();
-            personList1.AddElement(person7);
-            Console.WriteLine($"Список №1 после добавленя нового человека\n" +
-                $"{personList1.GetPersonList()}");
+            //Console.ReadKey();
+            //personList1.AddElement(person7);
+            //Console.WriteLine($"Список №1 после добавленя нового человека\n" +
+            //    $"{personList1.GetPersonList()}");
 
-            Console.ReadKey();
-            personList2.AddElement(personList1.SearchElementByIndex(1));
-            Console.WriteLine($"Список №1 после копирования\n{personList1.GetPersonList()}");
-            Console.WriteLine($"Список №2 после копирования\n{personList2.GetPersonList()}");
+            //Console.ReadKey();
+            //personList2.AddElement(personList1.SearchElementByIndex(1));
+            //Console.WriteLine($"Список №1 после копирования\n{personList1.GetPersonList()}");
+            //Console.WriteLine($"Список №2 после копирования\n{personList2.GetPersonList()}");
 
-            Console.ReadKey();
-            personList1.DeleteElementByIndex(1);
-            Console.WriteLine($"Список №1 после удаления\n{personList1.GetPersonList()}");
-            Console.WriteLine($"Список №2 после удаления\n{personList2.GetPersonList()}");
+            //Console.ReadKey();
+            //personList1.DeleteElementByIndex(1);
+            //Console.WriteLine($"Список №1 после удаления\n{personList1.GetPersonList()}");
+            //Console.WriteLine($"Список №2 после удаления\n{personList2.GetPersonList()}");
 
-            Console.ReadKey();
-            personList2.DeleteAllElement();
-            Console.WriteLine($"Список №2 после очистки\n{personList2.GetPersonList()}");
+            //Console.ReadKey();
+            //personList2.DeleteAllElement();
+            //Console.WriteLine($"Список №2 после очистки\n{personList2.GetPersonList()}");
 
             Console.ReadKey();
             Person person8 = CreatePersonFromConsole();
             Console.WriteLine($"{person8.GetPersonInfo()}");
 
-
-            Console.ReadKey();
-            Person person9 = GetRandomPerson();
-            Console.WriteLine($"{person9.GetPersonInfo()}");
+            //Console.ReadKey();
+            //Person person9 = GetRandomPerson();
+            //Console.WriteLine($"{person9.GetPersonInfo()}");
         }
     }
 }

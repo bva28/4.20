@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -27,6 +28,16 @@ namespace PersonLibrary
         private int _age;
 
         /// <summary>
+        /// Минимальный возраст.
+        /// </summary>
+        public const int MinAge = 0;
+
+        /// <summary>
+        /// Максимальный возраст.
+        /// </summary>
+        public const int MaxAge = 100;
+
+        /// <summary>
         /// Поле Gender. 
         /// </summary>
         private Gender _gender;
@@ -39,13 +50,7 @@ namespace PersonLibrary
             get { return _firstName; }
             set
             {
-                ConvertRegister(value);
-                if (IsSingleLanguage(value))
-                {
-                    throw new ArgumentException("Имя должно быть написано одним языком.");
-                }
-
-                _firstName = ConvertRegister(value);
+                _firstName = IsSingleLanguage(value);
             }
         }
 
@@ -57,16 +62,16 @@ namespace PersonLibrary
             get { return _lastName; }
             set
             {
-                if (IsSingleLanguage(value))
+                if (IsLanguageSame(_firstName, value) == true)
                 {
-                    throw new ArgumentException("Фамилия должна быть написана одним языком.");
+                    _lastName =IsSingleLanguage(value);
                 }
-                if (!IsNameLanguageMatched(FirstName, value))
+                else
                 {
-                    throw new ArgumentException("Язык фамилии должен совпадать с языком имени.");
-                }
-
-                _lastName = ConvertRegister(value);
+					throw new ArgumentException
+						("Имя и фамилия должны быть написаны" +
+						" на одном языке и не содержать символов");
+				}
             }
         }
 
@@ -75,20 +80,23 @@ namespace PersonLibrary
         /// </summary>
         public int Age
         {
-            get { return _age; }
+            get
+            {
+                return _age;
+            }
+
             set
             {
-                if (value < 0)
+                if (value >= MinAge && value <= MaxAge)
                 {
-                    throw new ArgumentException("Возраст не может быть отрицательным");
+                    _age = value;
                 }
-
-                if (value > 100)
+                else
                 {
-                    throw new ArgumentException("Бессмертен");
+                    throw new ArgumentException
+						($"Возраст должен находиться в пределах " +
+                        $"от {MinAge} года до {MaxAge} лет");
                 }
-
-                _age = value;
             }
         }
 
@@ -112,30 +120,54 @@ namespace PersonLibrary
             Gender = gender;
         }
 
-        /// <summary>
-        /// Возвращает информацию о человеке в виде строки. 
-        /// </summary>
-        /// <returns>Информация о человеке в виде строки.</returns>
-        public string GetPersonInfo()
+		/// <summary>
+		/// Конструктор класса по умолчанию.
+		/// </summary>
+		public Person() : this("Вася", "Пупкин", 1, Gender.Male)
+		{ }
+
+		/// <summary>
+		/// Возвращает информацию о человеке в виде строки. 
+		/// </summary>
+		/// <returns>Информация о человеке в виде строки.</returns>
+		public string GetPersonInfo()
         {
             return $"Имя: {FirstName}, Фмилия: {LastName}," +
                    $" Возраст: {Age}, Пол:{Gender}\n";
         }
 
         /// <summary>
-        /// Проверяет, содержит ли слово только один язык (русский или английский).
+        /// Патерн русского языка.
         /// </summary>
-        /// <param name="word">Слово для проверки.</param>
-        /// <returns>Значение true, если слово содержит только один язык; 
-        /// в противном случае — значение false.</returns>
-        private bool IsSingleLanguage(string word)
-        {
-            //TODO: duplication
-            bool hasRussian = Regex.IsMatch(word, @"[^а-яА-Я -]");
-            bool hasEnglish = Regex.IsMatch(word, @"[^a-zA-Z -]");
+        private const string russianPattern = @"(^[а-яА-Я]+-?[а-яА-Я]+$)";
 
-            return (hasRussian && hasEnglish);
-        }
+        /// <summary>
+        /// Патерн английского языка.
+        /// </summary>
+        private const string englishPattern = @"(^[a-zA-Z]+-?[a-zA-Z]+$)";
+
+		/// <summary>
+		/// Метод проверки правильности написания имени и фамилии и преобразования.
+		/// </summary>
+		/// <param name="word">Строка.</param>
+		/// <returns>Преобразованная строка.</returns>
+		/// <exception cref="Exception">Исключение.</exception>
+		private string IsSingleLanguage(string word)
+        {
+			//TODO: duplication +
+			string verifiedName = "";
+			if (Regex.IsMatch(word, russianPattern) ||
+				Regex.IsMatch(word, englishPattern))
+			{
+				TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
+				return verifiedName = textInfo.ToTitleCase(word);
+			}
+			else
+			{
+				throw new ArgumentException("Имя и фамилия должны " +
+					"содержать только русские или английские символы");
+			}
+		}
 
         /// <summary>
         /// Проверяет, соответствует ли язык имени и фамилии одному и тому же алфавиту.
@@ -144,50 +176,12 @@ namespace PersonLibrary
         /// <param name="lastName">Фамилия для проверки.</param>
         /// <returns>Значение true, если имя и фамилия соответствуют одному алфавиту; 
         /// в противном случае — значение false.</returns>
-        private bool IsNameLanguageMatched(string firstName, string lastName)
+        public bool IsLanguageSame(string firstName, string lastName)
         {
-            //TODO: duplication
-            bool hasRussianFirstName = Regex.IsMatch(firstName, @"[^а-яА-Я -]");
-            bool hasRussianLastName = Regex.IsMatch(lastName, @"[^а-яА-Я -]");
-
-            bool hasEnglishFirstName = Regex.IsMatch(firstName, @"[^a-zA-Z -]");
-            bool hasEnglishLastName = Regex.IsMatch(lastName, @"[^a-zA-Z -]");
-
-            return (hasRussianFirstName && hasRussianLastName) ||
-                (hasEnglishFirstName && hasEnglishLastName);
-        }
-
-        /// <summary>
-        /// Преобразует регистр строки, 
-        /// делая первую букву заглавной, а остальные - строчными.
-        /// </summary>
-        /// <param name="input">Входная строка для преобразования.</param>
-        /// <returns>Преобразованная строка.</returns>
-        private static string ConvertRegister(string input)
-        {
-            if (input.Contains('-') || input.Contains(' '))
-            {
-                string[] nameParts = input.Split('-', ' ');
-
-                string result = "";
-
-                foreach (string part in nameParts)
-                {
-                    if (!string.IsNullOrEmpty(part))
-                    {
-                        string lowerCase = part.ToLower();
-                        result += char.ToUpper(lowerCase[0]) 
-                                + lowerCase.Substring(1) + " ";
-                    }
-                }
-
-                return result.TrimEnd();
-            }
-            else
-            {
-                string lowerCase = input.ToLower();
-                return char.ToUpper(lowerCase[0]) + lowerCase.Substring(1);
-            }
+            return (Regex.IsMatch(firstName, russianPattern) && 
+                    Regex.IsMatch(lastName, russianPattern)) || 
+                   (Regex.IsMatch(firstName, englishPattern) &&
+                    Regex.IsMatch(lastName, englishPattern));
         }
     }
 }
