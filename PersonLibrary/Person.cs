@@ -136,13 +136,11 @@ namespace PersonLibrary
                    $" Возраст: {Age}, Пол:{Gender}\n";
         }
 
-        //TODO: RSDN+
         /// <summary>
         /// Патерн русского языка.
         /// </summary>
         private const string _russianPattern = @"(^[а-яА-Я]+-?[а-яА-Я]+$)";
 
-        //TODO: RSDN+
         /// <summary>
         /// Патерн английского языка.
         /// </summary>

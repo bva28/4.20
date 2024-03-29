@@ -92,7 +92,6 @@ namespace LR1
 					action.Invoke();
 					return;
 				}
-                //TODO: RSDN+
 				catch (Exception exception)
 				{
 
@@ -122,7 +121,6 @@ namespace LR1
             int rndGender = random.Next(0, Enum.GetNames(typeof(Gender)).Length);
 
             int rndMaleFirstNames = random.Next(0, maleFirstNames.Length);
-            //TODO: BUG+
             int rndFemaleFirstNames = random.Next(0, femaleFirstNames.Length);
             int rndLastName = random.Next(0, lastNameList.Length);
             
