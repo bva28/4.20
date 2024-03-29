@@ -136,11 +136,13 @@ namespace PersonLibrary
                    $" Возраст: {Age}, Пол:{Gender}\n";
         }
 
+        //TODO: RSDN
         /// <summary>
         /// Патерн русского языка.
         /// </summary>
         private const string russianPattern = @"(^[а-яА-Я]+-?[а-яА-Я]+$)";
 
+        //TODO: RSDN
         /// <summary>
         /// Патерн английского языка.
         /// </summary>
@@ -154,13 +156,11 @@ namespace PersonLibrary
 		/// <exception cref="Exception">Исключение.</exception>
 		private string IsSingleLanguage(string word)
         {
-			//TODO: duplication +
-			string verifiedName = "";
 			if (Regex.IsMatch(word, russianPattern) ||
 				Regex.IsMatch(word, englishPattern))
 			{
 				TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
-				return verifiedName = textInfo.ToTitleCase(word);
+				return textInfo.ToTitleCase(word);
 			}
 			else
 			{

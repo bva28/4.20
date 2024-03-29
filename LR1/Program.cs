@@ -92,9 +92,10 @@ namespace LR1
 					action.Invoke();
 					return;
 				}
-
+                //TODO: RSDN
 				catch (Exception ex)
 				{
+
 					var exceptionType = ex.GetType();
 					if (exceptionType == typeof(FormatException) ||
 						exceptionType == typeof(ArgumentException))
@@ -116,12 +117,12 @@ namespace LR1
 
             string[] maleFirstNames = { "Егор", "Сергей", "Юрий", "Александр", "Николай" };
             string[] femaleFirstNames = { "Дарья", "Софья", "Екатерина", "Мария", "Виктория" };
-            //TODO: RSDN +
             string[] lastNameList = { "Андреев", "Гаврилов", "Ельцин", "Захаров", "Исаев" };
 
             int rndGender = random.Next(0, Enum.GetNames(typeof(Gender)).Length);
 
             int rndMaleFirstNames = random.Next(0, maleFirstNames.Length);
+            //TODO: BUG
             int rndFemaleFirstNames = random.Next(0, femaleFirstNames.Length);
             int rndLastName = random.Next(0, lastNameList.Length);
             
@@ -143,7 +144,6 @@ namespace LR1
                     break;
             }
 
-            //TODO: duplication+
             int age = random.Next(Person.MinAge, Person.MaxAge);
             
             return new Person(firstName, lastName, age, gender);
@@ -175,37 +175,37 @@ namespace LR1
             personList2.AddElement(person5);
             personList2.AddElement(person6);
 
-            //Console.ReadKey();
-            //Console.WriteLine($"Список №1\n{personList1.GetPersonList()}");
-            //Console.ReadKey();
-            //Console.WriteLine($"Список №2\n{personList2.GetPersonList()}");
+            Console.ReadKey();
+            Console.WriteLine($"Список №1\n{personList1.GetPersonList()}");
+            Console.ReadKey();
+            Console.WriteLine($"Список №2\n{personList2.GetPersonList()}");
 
-            //Console.ReadKey();
-            //personList1.AddElement(person7);
-            //Console.WriteLine($"Список №1 после добавленя нового человека\n" +
-            //    $"{personList1.GetPersonList()}");
+            Console.ReadKey();
+            personList1.AddElement(person7);
+            Console.WriteLine($"Список №1 после добавленя нового человека\n" +
+                $"{personList1.GetPersonList()}");
 
-            //Console.ReadKey();
-            //personList2.AddElement(personList1.SearchElementByIndex(1));
-            //Console.WriteLine($"Список №1 после копирования\n{personList1.GetPersonList()}");
-            //Console.WriteLine($"Список №2 после копирования\n{personList2.GetPersonList()}");
+            Console.ReadKey();
+            personList2.AddElement(personList1.SearchElementByIndex(1));
+            Console.WriteLine($"Список №1 после копирования\n{personList1.GetPersonList()}");
+            Console.WriteLine($"Список №2 после копирования\n{personList2.GetPersonList()}");
 
-            //Console.ReadKey();
-            //personList1.DeleteElementByIndex(1);
-            //Console.WriteLine($"Список №1 после удаления\n{personList1.GetPersonList()}");
-            //Console.WriteLine($"Список №2 после удаления\n{personList2.GetPersonList()}");
+            Console.ReadKey();
+            personList1.DeleteElementByIndex(1);
+            Console.WriteLine($"Список №1 после удаления\n{personList1.GetPersonList()}");
+            Console.WriteLine($"Список №2 после удаления\n{personList2.GetPersonList()}");
 
-            //Console.ReadKey();
-            //personList2.DeleteAllElement();
-            //Console.WriteLine($"Список №2 после очистки\n{personList2.GetPersonList()}");
+            Console.ReadKey();
+            personList2.DeleteAllElement();
+            Console.WriteLine($"Список №2 после очистки\n{personList2.GetPersonList()}");
 
             Console.ReadKey();
             Person person8 = CreatePersonFromConsole();
             Console.WriteLine($"{person8.GetPersonInfo()}");
 
-            //Console.ReadKey();
-            //Person person9 = GetRandomPerson();
-            //Console.WriteLine($"{person9.GetPersonInfo()}");
+            Console.ReadKey();
+            Person person9 = GetRandomPerson();
+            Console.WriteLine($"{person9.GetPersonInfo()}");
         }
     }
 }

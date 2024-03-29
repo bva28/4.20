@@ -11,7 +11,6 @@ namespace PersonLibrary
     /// </summary>
     public enum Gender
     {
-        //TODO: XML +
         /// <summary>
         /// Мужской пол.
         /// </summary>
