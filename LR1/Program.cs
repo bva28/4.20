@@ -92,15 +92,15 @@ namespace LR1
 					action.Invoke();
 					return;
 				}
-                //TODO: RSDN
-				catch (Exception ex)
+                //TODO: RSDN+
+				catch (Exception exception)
 				{
 
-					var exceptionType = ex.GetType();
+					var exceptionType = exception.GetType();
 					if (exceptionType == typeof(FormatException) ||
 						exceptionType == typeof(ArgumentException))
 					{
-						Console.WriteLine(ex.Message);
+						Console.WriteLine(exception.Message);
 					}
 				}
 			}
@@ -122,7 +122,7 @@ namespace LR1
             int rndGender = random.Next(0, Enum.GetNames(typeof(Gender)).Length);
 
             int rndMaleFirstNames = random.Next(0, maleFirstNames.Length);
-            //TODO: BUG
+            //TODO: BUG+
             int rndFemaleFirstNames = random.Next(0, femaleFirstNames.Length);
             int rndLastName = random.Next(0, lastNameList.Length);
             
@@ -138,7 +138,7 @@ namespace LR1
                     break;
 
                 case 1:
-                    firstName = maleFirstNames[rndMaleFirstNames];
+                    firstName = maleFirstNames[rndFemaleFirstNames];
                     lastName = lastNameList[rndLastName] + "а";
                     gender = (Gender)rndGender;
                     break;
