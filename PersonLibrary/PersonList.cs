@@ -12,11 +12,11 @@ namespace PersonLibrary
     /// </summary>
     public class PersonList
     {
-        //TODO: RSDN
+        //TODO: RSDN+
         /// <summary>
         /// Список объектов типа Person.
         /// </summary>
-        private List<Person> List = new List<Person>();
+        private List<Person> _list = new List<Person>();
 
         /// <summary>
         /// Добавляет элемент типа Person в список.
@@ -24,7 +24,7 @@ namespace PersonLibrary
         /// <param name="element">Элемент типа Person для добавления в список.</param>
         public void AddElement(Person element)
         {
-            List.Add(element);
+            _list.Add(element);
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace PersonLibrary
         /// <param name="element">Элемент типа Person для удаления из списка.</param>
         public void DeleteElement(Person element)
         {
-            List.Remove(element);
+            _list.Remove(element);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace PersonLibrary
         /// <param name="index">Индекс элемента типа Person для удаления из списка.</param>
         public void DeleteElementByIndex(int index)
         {
-            List.RemoveAt(index);
+            _list.RemoveAt(index);
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace PersonLibrary
         /// <returns></returns>
         public Person SearchElementByIndex(int index)
         {
-            return List[index];
+            return _list[index];
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace PersonLibrary
         /// <param name="element">Элемент типа Person для поиска в списке.</param>
         public void SearchIndex(Person element)
         {
-            int index = List.IndexOf(element);
+            int index = _list.IndexOf(element);
 
             if (index != -1)
             {
@@ -79,7 +79,7 @@ namespace PersonLibrary
         /// </summary>
         public void DeleteAllElement()
         {
-            List.Clear();
+            _list.Clear();
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace PersonLibrary
         /// <returns>Количество элементов типа Person в списке.</returns>
         public int CountElement()
         {
-            return List.Count;
+            return _list.Count;
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace PersonLibrary
         {
             string result = "";
 
-            foreach (Person person in List)
+            foreach (Person person in _list)
             {
                 result += person.GetPersonInfo();
             }
