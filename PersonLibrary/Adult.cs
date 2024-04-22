@@ -67,7 +67,7 @@ namespace PersonLibrary
 				}
 				else
 				{
-					throw new ArgumentOutOfRangeException("Номер паспорта должна содержать 4 цифры");
+					throw new ArgumentOutOfRangeException("Номер паспорта должна содержать 6 цифры");
 				}
 			}
 		}
@@ -110,7 +110,10 @@ namespace PersonLibrary
 			}
 		}
 
-		public Adult() : this("Неизвестно", "Неизвестно", 18, Gender.Male,
+        /// <summary>
+        /// Конструктор класса Adult.
+        /// </summary>
+        public Adult() : this("Неизвестно", "Неизвестно", 18, Gender.Male,
 			1000, 100000, null, "")
 		{ }
 
@@ -136,7 +139,11 @@ namespace PersonLibrary
 			Job = job;
 		}
 
-		public override string GetInfo()
+        /// <summary>
+        /// Возвращает информацию о человеке в виде строки. 
+        /// </summary>
+        /// <returns>Информация о человеке в виде строки.</returns>
+        public override string GetInfo()
 		{
 			string partner = "";
 			if (Partner == null)
@@ -153,11 +160,21 @@ namespace PersonLibrary
 				   $" Партнер: {partner}, Место работы: {Job}\n";
 		}
 
+		/// <summary>
+		/// Жалобы на работы.
+		/// </summary>
+		/// <returns>Строка жалоб.</returns>
 		public string ComplainAboutWork()
 		{
-			return "Прогуливает работу";
+			return "Не любит вставать по утрам на работу";
 		}
 
+		/// <summary>
+		/// Проверка длины.
+		/// </summary>
+		/// <param name="data"></param>
+		/// <param name="length"></param>
+		/// <returns>Результат проверки.</returns>
 		public bool VerifyPassport(int data, int length)
 		{
 			return data.ToString().Length == length;

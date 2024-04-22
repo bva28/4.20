@@ -51,7 +51,7 @@ namespace LR2
 		{
 			Random random = new Random();
 			PersonList personList = new PersonList();
-			for (int i = 0; i < 15; i++)
+			for (int i = 0; i < 7; i++)
 			{
 				int randomClass = random.Next(2);
 				if (randomClass == 0)

@@ -84,7 +84,10 @@ namespace PersonLibrary
 			}
 		}
 
-		public Child() : this("Неизвестно", "Неизвестно", 0, Gender.Male,
+        /// <summary>
+        /// Конструктор Child.
+        /// </summary>
+        public Child() : this("Неизвестно", "Неизвестно", 0, Gender.Male,
 			null, null, "")
 		{ }
 
@@ -108,7 +111,11 @@ namespace PersonLibrary
 			School = school;
 		}
 
-		public override string GetInfo()
+        /// <summary>
+        /// Возвращает информацию о человеке в виде строки. 
+        /// </summary>
+        /// <returns>Информация о человеке в виде строки.</returns>
+        public override string GetInfo()
 		{
 			string father = "нет отца";
 			string mother = "нет матери";
@@ -124,7 +131,11 @@ namespace PersonLibrary
 			return base.GetInfo() + $", Отец: {father}, Мать: {mother}, Школа: {School}\n";
 		}
 
-		public string ComplainAboutSchool()
+        /// <summary>
+        /// Жалобы на школу.
+        /// </summary>
+        /// <returns>Строка жалоб.</returns>
+        public string ComplainAboutSchool()
 		{
 			return "Не любит ходить в школу";
 		}
