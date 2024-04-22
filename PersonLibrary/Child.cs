@@ -48,7 +48,6 @@ namespace PersonLibrary
 			}
 		}
 
-		//TODO+: validation
 		/// <summary>
 		/// Свойство для получения доступа к полю _mother.
 		/// </summary>
