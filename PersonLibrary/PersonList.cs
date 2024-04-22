@@ -100,7 +100,7 @@ namespace PersonLibrary
 
             foreach (Person person in _list)
             {
-                result += person.GetPersonInfo();
+                result += person.GetInfo();
             }
             return result;
         }

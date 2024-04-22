@@ -27,20 +27,20 @@ namespace PersonLibrary
         /// </summary>
         private int _age;
 
-        /// <summary>
-        /// Минимальный возраст.
-        /// </summary>
-        public const int MinAge = 0;
+		/// <summary>
+		/// Минимальный возраст.
+		/// </summary>
+		public virtual int MinAge { get; } = 0;
 
-        /// <summary>
-        /// Максимальный возраст.
-        /// </summary>
-        public const int MaxAge = 100;
+		/// <summary>
+		/// Максимальный возраст.
+		/// </summary>
+		public virtual int MaxAge { get; } = 120;
 
-        /// <summary>
-        /// Поле Gender. 
-        /// </summary>
-        private Gender _gender;
+		/// <summary>
+		/// Поле Gender. 
+		/// </summary>
+		private Gender _gender;
 
         /// <summary>
         /// Поле FirstName. 
@@ -130,7 +130,7 @@ namespace PersonLibrary
 		/// Возвращает информацию о человеке в виде строки. 
 		/// </summary>
 		/// <returns>Информация о человеке в виде строки.</returns>
-		public string GetPersonInfo()
+		public virtual string GetInfo()
         {
             return $"Имя: {FirstName}, Фмилия: {LastName}," +
                    $" Возраст: {Age}, Пол:{Gender}\n";
