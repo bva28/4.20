@@ -26,6 +26,7 @@ namespace PersonLibrary
 		/// </summary>
 		private string _school;
 
+		//TODO: XML
 		public override int MaxAge { get; } = 17;
 
 		/// <summary>

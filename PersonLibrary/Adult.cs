@@ -31,6 +31,7 @@ namespace PersonLibrary
 		/// </summary>
 		private string _job;
 
+		//TODO: XML
 		public override int MinAge { get; } = 18;
 
 		/// <summary>
@@ -47,6 +48,7 @@ namespace PersonLibrary
 				}
 				else
 				{
+					//TODO: RSDN
 					throw new ArgumentOutOfRangeException("Серия паспорта должна содержать 4 цифры");
 				}
 			}
@@ -67,6 +69,7 @@ namespace PersonLibrary
 				}
 				else
 				{
+					//TODO: RSDN
 					throw new ArgumentOutOfRangeException("Номер паспорта должна содержать 6 цифры");
 				}
 			}
@@ -177,6 +180,7 @@ namespace PersonLibrary
 		/// <returns>Результат проверки.</returns>
 		public bool VerifyPassport(int data, int length)
 		{
+			//TODO: 
 			return data.ToString().Length == length;
 		}
 	}

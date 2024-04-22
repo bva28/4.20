@@ -7,6 +7,8 @@ using System.Xml.Linq;
 
 namespace PersonLibrary
 {
+    //TODO: abstract
+    //TODO: RSDN
     /// <summary>
     /// Person. 
     /// </summary>
@@ -64,7 +66,7 @@ namespace PersonLibrary
             {
                 if (IsLanguageSame(_firstName, value) == true)
                 {
-                    _lastName =IsSingleLanguage(value);
+                    _lastName = IsSingleLanguage(value);
                 }
                 else
                 {

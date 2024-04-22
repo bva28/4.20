@@ -70,6 +70,7 @@ namespace LR2
 			Type type = person.GetType();
 			Console.WriteLine($"Тип четвертого человека в списке: {type}");
 
+			//TODO: switch-case
 			if (type == typeof(Adult))
 			{
 				Console.WriteLine(((Adult)person).ComplainAboutWork());
