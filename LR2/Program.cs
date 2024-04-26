@@ -72,13 +72,17 @@ namespace LR2
 
 			switch (person)
 			{
-				//TODO: RSDN
+				//TODO: RSDN+
 				case Adult adult:
-					Console.WriteLine(adult.ComplainAboutWork());
-					break;
-				case Child child:
-					Console.WriteLine(child.ComplainAboutSchool());
-					break;
+					{
+                        Console.WriteLine(adult.ComplainAboutWork());
+                        break;
+                    }
+				case (Child child):
+					{
+                        Console.WriteLine(child.ComplainAboutSchool());
+                        break;
+                    }
 			}
 		}
 	}

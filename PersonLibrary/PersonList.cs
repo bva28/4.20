@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace PersonLibrary
 {
@@ -55,22 +56,23 @@ namespace PersonLibrary
         }
 
         /// <summary>
-        /// Ищет индекс указанного элемента типа Person в списке List и выводит его на консоль.
+        /// Ищет индекс указанного элемента типа Person в списке List и возвращает его.
         /// Если элемент не найден, выводит сообщение об этом.
         /// </summary>
         /// <param name="element">Элемент типа Person для поиска в списке.</param>
-        public void SearchIndex(PersonBase element)
+        public int SearchIndex(PersonBase element)
         {
             int index = _list.IndexOf(element);
 
-            //TODO: remove console
+            //TODO: remove console+
             if (index != -1)
             {
-                Console.WriteLine($"Индекс {element}: {index}");
+                return index;
             }
             else
             {
-                Console.WriteLine($"Число {element} не найдено в списке.");
+                throw new IndexOutOfRangeException($"Элемент" +
+                    $" с индексом {index} в списке отсутствует");
             }
         }
 

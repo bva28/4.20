@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace PersonLibrary
 {
-	//TODO: XML
-	public class RandomPerson
+    //TODO: XML+
+    /// <summary>
+    /// Класс RandomPerson.
+    /// </summary>
+    public class RandomPerson
 	{
 		/// <summary>
 		/// Метод получения рандомного объекта класса Adult.
@@ -113,18 +116,22 @@ namespace PersonLibrary
 
 			person.LastName = lastNames[random.Next
 				(0, lastNames.Count)];
-			//TODO: RSDN
+			//TODO: RSDN+
 			switch (person.Gender)
 			{
 				case Gender.Male:
-					person.FirstName = maleNames[random.Next
+					{
+                        person.FirstName = maleNames[random.Next
 						(0, maleNames.Count)];
-					break;
+                        break;
+                    }
 				case Gender.Female:
-					person.FirstName = femaleNames[random.Next
+					{
+                        person.FirstName = femaleNames[random.Next
 						(0, femaleNames.Count)];
-					person.LastName += "а";
-					break;
+                        person.LastName += "а";
+                        break;
+                    }
 			}
 
 			person.Age = random.Next(person.MinAge, person.MaxAge);
@@ -167,20 +174,27 @@ namespace PersonLibrary
 			};
 
 			int parentsStatus = random.Next(1, 3);
-			//TODO: RSDN
+			//TODO: RSDN+
 			switch (parentsStatus)
 			{
 				case 3:
-					child.Father = GetRandomAdult(Gender.Male);
-					break;
+					{
+                        child.Father = GetRandomAdult(Gender.Male);
+                        break;
+                    }
 				case 2:
-					child.Father = GetRandomAdult(Gender.Male);
-					SetAdultPartner(child.Father);
-					child.Mother = child.Father.Partner;
-					break;
+					{
+                        child.Father = GetRandomAdult(Gender.Male);
+                        SetAdultPartner(child.Father);
+                        child.Mother = child.Father.Partner;
+                        break;
+                    }
 				case 1:
-					child.Mother = GetRandomAdult(Gender.Female);
-					break;
+					{
+                        child.Mother = GetRandomAdult(Gender.Female);
+                        break;
+                    }
+					
 			}
 
 			child.School = schoolList[random.Next(0, schoolList.Count)];
