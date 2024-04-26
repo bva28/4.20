@@ -11,7 +11,7 @@ namespace LR2
 		/// Метод вывода данных полей объекта класса Person в консоль.
 		/// </summary>
 		/// <param name="person">Объект класса Person.</param>
-		public static void PrintPersonToConsole(Person person)
+		public static void PrintPersonToConsole(PersonBase person)
 		{
 			Console.WriteLine(person.GetInfo());
 		}
@@ -70,14 +70,15 @@ namespace LR2
 			Type type = person.GetType();
 			Console.WriteLine($"Тип четвертого человека в списке: {type}");
 
-			//TODO: switch-case
-			if (type == typeof(Adult))
+			//TODO: switch-case+
+			switch (person)
 			{
-				Console.WriteLine(((Adult)person).ComplainAboutWork());
-			}
-			if (type == typeof(Child))
-			{
-				Console.WriteLine(((Child)person).ComplainAboutSchool());
+				case Adult adult:
+					Console.WriteLine(adult.ComplainAboutWork());
+					break;
+				case Child child:
+					Console.WriteLine(child.ComplainAboutSchool());
+					break;
 			}
 		}
 	}

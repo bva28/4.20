@@ -9,7 +9,7 @@ namespace PersonLibrary
 	/// <summary>
 	/// Класс Adult.
 	/// </summary>
-	public class Adult : Person
+	public class Adult : PersonBase
 	{
 		/// <summary>
 		/// Поле серии паспорта.
@@ -31,8 +31,31 @@ namespace PersonLibrary
 		/// </summary>
 		private string _job;
 
-		//TODO: XML
+		//TODO: XML+
+		/// <summary>
+		/// Минимальный возраст.
+		/// </summary>
 		public override int MinAge { get; } = 18;
+
+		/// <summary>
+		/// Минимальное значение серии паспорта.
+		/// </summary>
+		public const int MinPassportSeries = 1000;
+
+		/// <summary>
+		/// Максимальное значение серии паспорта.
+		/// </summary>
+		public const int MaxPassportSeries = 9999;
+
+		/// <summary>
+		/// Минимальное значение номера паспорта.
+		/// </summary>
+		public const int MinPassportNumber = 100000;
+
+		/// <summary>
+		/// Максимальное значение номера паспорта.
+		/// </summary>
+		public const int MaxPassportNumber = 999999;
 
 		/// <summary>
 		/// Свойство для получения доступа к полю _passportSeries.
@@ -42,14 +65,15 @@ namespace PersonLibrary
 			get { return _passportSeries; }
 			set
 			{
-				if (VerifyPassport(value, 4))
+				if (value >= MinPassportSeries && value <= MaxPassportSeries)
 				{
 					_passportSeries = value;
 				}
 				else
 				{
-					//TODO: RSDN
-					throw new ArgumentOutOfRangeException("Серия паспорта должна содержать 4 цифры");
+					//TODO: RSDN+
+					throw new ArgumentOutOfRangeException
+						("Серия паспорта должна содержать 4 цифры");
 				}
 			}
 		}
@@ -62,15 +86,15 @@ namespace PersonLibrary
 			get { return _passportNumber; }
 			set
 			{
-				_passportNumber = value;
-				if (VerifyPassport(value, 6))
+				if (value >= MinPassportNumber && value <= MaxPassportNumber)
 				{
 					_passportNumber = value;
 				}
 				else
 				{
-					//TODO: RSDN
-					throw new ArgumentOutOfRangeException("Номер паспорта должна содержать 6 цифры");
+					//TODO: RSDN+
+					throw new ArgumentOutOfRangeException
+						("Номер паспорта должна содержать 6 цифры");
 				}
 			}
 		}
@@ -178,10 +202,10 @@ namespace PersonLibrary
 		/// <param name="data"></param>
 		/// <param name="length"></param>
 		/// <returns>Результат проверки.</returns>
-		public bool VerifyPassport(int data, int length)
-		{
-			//TODO: 
-			return data.ToString().Length == length;
-		}
+		//public bool VerifyPassport(int data, int length)
+		//{
+		//	//TODO:+ 
+		//	return data.ToString().Length == length;
+		//}
 	}
 }

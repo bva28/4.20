@@ -15,13 +15,13 @@ namespace PersonLibrary
         /// <summary>
         /// Список объектов типа Person.
         /// </summary>
-        private List<Person> _list = new List<Person>();
+        private List<PersonBase> _list = new List<PersonBase>();
 
         /// <summary>
         /// Добавляет элемент типа Person в список.
         /// </summary>
         /// <param name="element">Элемент типа Person для добавления в список.</param>
-        public void AddElement(Person element)
+        public void AddElement(PersonBase element)
         {
             _list.Add(element);
         }
@@ -30,7 +30,7 @@ namespace PersonLibrary
         /// Удаляет элемент типа Person из списка.
         /// </summary>
         /// <param name="element">Элемент типа Person для удаления из списка.</param>
-        public void DeleteElement(Person element)
+        public void DeleteElement(PersonBase element)
         {
             _list.Remove(element);
         }
@@ -49,7 +49,7 @@ namespace PersonLibrary
         /// </summary>
         /// <param name="index">Индекс элемента типа Person для поиска.</param>
         /// <returns></returns>
-        public Person SearchElementByIndex(int index)
+        public PersonBase SearchElementByIndex(int index)
         {
             return _list[index];
         }
@@ -59,7 +59,7 @@ namespace PersonLibrary
         /// Если элемент не найден, выводит сообщение об этом.
         /// </summary>
         /// <param name="element">Элемент типа Person для поиска в списке.</param>
-        public void SearchIndex(Person element)
+        public void SearchIndex(PersonBase element)
         {
             int index = _list.IndexOf(element);
 
@@ -98,7 +98,7 @@ namespace PersonLibrary
         {
             string result = "";
 
-            foreach (Person person in _list)
+            foreach (PersonBase person in _list)
             {
                 result += person.GetInfo();
             }

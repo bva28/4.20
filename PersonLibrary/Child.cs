@@ -9,7 +9,7 @@ namespace PersonLibrary
 	/// <summary>
 	/// Класс Child (наследник класса Person).
 	/// </summary>
-	public class Child : Person
+	public class Child : PersonBase
 	{
 		/// <summary>
 		/// Поле отца.
@@ -26,7 +26,10 @@ namespace PersonLibrary
 		/// </summary>
 		private string _school;
 
-		//TODO: XML
+		//TODO: XML+
+		/// <summary>
+		/// Максимальный возраст.
+		/// </summary>
 		public override int MaxAge { get; } = 17;
 
 		/// <summary>

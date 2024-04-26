@@ -80,7 +80,7 @@ namespace PersonLibrary
 		/// Метод установки рандомного пола.
 		/// </summary>
 		/// <param name="person">Объект класса Person.</param>
-		public static void SetPersonGender(Person person)
+		public static void SetPersonGender(PersonBase person)
 		{
 			Random random = new Random();
 			person.Gender = (Gender)random.Next(Enum.GetValues
@@ -91,7 +91,7 @@ namespace PersonLibrary
 		/// Метод установки данных полей базового класса Person.
 		/// </summary>
 		/// <param name="person">Объект класса Person.</param>
-		public static void SetPersonData(Person person)
+		public static void SetPersonData(PersonBase person)
 		{
 			Random random = new Random();
 

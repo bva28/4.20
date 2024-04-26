@@ -7,12 +7,12 @@ using System.Xml.Linq;
 
 namespace PersonLibrary
 {
-    //TODO: abstract
-    //TODO: RSDN
+    //TODO: abstract+
+    //TODO: RSDN+
     /// <summary>
     /// Person. 
     /// </summary>
-    public class Person
+    public abstract class PersonBase
     {
         /// <summary>
         /// Поле FirstName.
@@ -114,7 +114,7 @@ namespace PersonLibrary
         /// <param name="lastName">Фамилия человека.</param>
         /// <param name="age">Возраст человека.</param>
         /// <param name="gender">Пол человека.</param>
-        public Person(string firstName, string lastName, int age, Gender gender)
+        public PersonBase(string firstName, string lastName, int age, Gender gender)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -125,7 +125,7 @@ namespace PersonLibrary
 		/// <summary>
 		/// Конструктор класса по умолчанию.
 		/// </summary>
-		public Person() : this("Вася", "Пупкин", 1, Gender.Male)
+		public PersonBase() : this("Вася", "Пупкин", 1, Gender.Male)
 		{ }
 
 		/// <summary>
