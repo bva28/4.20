@@ -64,7 +64,6 @@ namespace PersonLibrary
         {
             int index = _list.IndexOf(element);
 
-            //TODO: remove console+
             if (index != -1)
             {
                 return index;

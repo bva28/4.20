@@ -72,7 +72,7 @@ namespace LR2
 
 			switch (person)
 			{
-				//TODO: RSDN+
+				//TODO: RSDN
 				case Adult adult:
 					{
                         Console.WriteLine(adult.ComplainAboutWork());
