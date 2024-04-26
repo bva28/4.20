@@ -70,9 +70,9 @@ namespace LR2
 			Type type = person.GetType();
 			Console.WriteLine($"Тип четвертого человека в списке: {type}");
 
-			//TODO: switch-case+
 			switch (person)
 			{
+				//TODO: RSDN
 				case Adult adult:
 					Console.WriteLine(adult.ComplainAboutWork());
 					break;

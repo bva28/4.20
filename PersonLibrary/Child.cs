@@ -26,7 +26,6 @@ namespace PersonLibrary
 		/// </summary>
 		private string _school;
 
-		//TODO: XML+
 		/// <summary>
 		/// Максимальный возраст.
 		/// </summary>

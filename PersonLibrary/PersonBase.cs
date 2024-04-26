@@ -7,8 +7,6 @@ using System.Xml.Linq;
 
 namespace PersonLibrary
 {
-    //TODO: abstract+
-    //TODO: RSDN+
     /// <summary>
     /// Person. 
     /// </summary>

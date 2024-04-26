@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace PersonLibrary
 {
+	//TODO: XML
 	public class RandomPerson
 	{
 		/// <summary>
@@ -112,7 +113,7 @@ namespace PersonLibrary
 
 			person.LastName = lastNames[random.Next
 				(0, lastNames.Count)];
-
+			//TODO: RSDN
 			switch (person.Gender)
 			{
 				case Gender.Male:
@@ -166,6 +167,7 @@ namespace PersonLibrary
 			};
 
 			int parentsStatus = random.Next(1, 3);
+			//TODO: RSDN
 			switch (parentsStatus)
 			{
 				case 3:
