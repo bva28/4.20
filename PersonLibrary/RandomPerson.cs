@@ -65,15 +65,19 @@ namespace PersonLibrary
 			{
 				switch (adult.Gender)
 				{
-					//TODO: RSDN
+					//TODO: RSDN+
 					case Gender.Male:
-						partner = GetRandomAdult(Gender.Female);
-						partner.LastName = adult.LastName + 'а';
-						break;
+					{
+                        partner = GetRandomAdult(Gender.Female);
+                        partner.LastName = adult.LastName + 'а';
+                        break;
+                    }
 					case Gender.Female:
-						partner = GetRandomAdult(Gender.Male);
-						adult.LastName = partner.LastName + 'а';
-						break;
+					{
+                        partner = GetRandomAdult(Gender.Male);
+                        adult.LastName = partner.LastName + 'а';
+                        break;
+                    }
 				}
 
 				adult.Partner = partner;
@@ -116,22 +120,22 @@ namespace PersonLibrary
 
 			person.LastName = lastNames[random.Next
 				(0, lastNames.Count)];
-			//TODO: RSDN
+			//TODO: RSDN+
 			switch (person.Gender)
 			{
 				case Gender.Male:
-					{
-                        person.FirstName = maleNames[random.Next
-							(0, maleNames.Count)];
-                        break;
-                    }
+				{
+                    person.FirstName = maleNames[random.Next
+						(0, maleNames.Count)];
+                    break;
+                }
 				case Gender.Female:
-					{
-                        person.FirstName = femaleNames[random.Next
-							(0, femaleNames.Count)];
-                        person.LastName += "а";
-                        break;
-                    }
+				{
+                    person.FirstName = femaleNames[random.Next
+						(0, femaleNames.Count)];
+                    person.LastName += "а";
+                    break;
+                }
 			}
 
 			person.Age = random.Next(person.MinAge, person.MaxAge);
@@ -174,26 +178,26 @@ namespace PersonLibrary
 			};
 
 			int parentsStatus = random.Next(1, 3);
-			//TODO: RSDN
+			//TODO: RSDN+
 			switch (parentsStatus)
 			{
 				case 3:
-					{
-                        child.Father = GetRandomAdult(Gender.Male);
-                        break;
-                    }
+				{
+                    child.Father = GetRandomAdult(Gender.Male);
+                    break;
+                }
 				case 2:
-					{
-                        child.Father = GetRandomAdult(Gender.Male);
-                        SetAdultPartner(child.Father);
-                        child.Mother = child.Father.Partner;
-                        break;
-                    }
+				{
+                    child.Father = GetRandomAdult(Gender.Male);
+                    SetAdultPartner(child.Father);
+                    child.Mother = child.Father.Partner;
+                    break;
+                }
 				case 1:
-					{
-                        child.Mother = GetRandomAdult(Gender.Female);
-                        break;
-                    }
+				{
+                    child.Mother = GetRandomAdult(Gender.Female);
+                    break;
+                }
 					
 			}
 
