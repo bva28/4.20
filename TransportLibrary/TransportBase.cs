@@ -45,6 +45,5 @@ namespace TransportLibrary
 		/// <param name="distance">Расстояние.</param>
 		/// <returns>Расход топлива (л).</returns>
 		public abstract double CalculateFuel(double distance);
-
 	}
 }
