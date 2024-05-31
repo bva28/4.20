@@ -84,30 +84,30 @@ namespace LR3
 		public static Car ReadCar()
 		{
 			Dictionary<Type, Action<string>> catchDictionary =
-				new Dictionary<Type, Action<string>>()
+			new Dictionary<Type, Action<string>>()
+			{
 				{
+					typeof(ArgumentException),
+					(string message) =>
 					{
-						typeof(ArgumentException),
-						(string message) =>
-						{
-							Console.WriteLine($"\nИсключение: {message}");
-						}
-					},
+						Console.WriteLine($"\nИсключение: {message}");
+					}
+				},
+				{
+					typeof(FormatException),
+					(string message) =>
 					{
-						typeof(FormatException),
-						(string message) =>
-						{
-							Console.WriteLine($"\nИсключение: {message}");
-						}
-					},
+						Console.WriteLine($"\nИсключение: {message}");
+					}
+				},
+				{
+					typeof(OverflowException),
+					(string message) =>
 					{
-						typeof(OverflowException),
-						(string message) =>
-						{
-							Console.WriteLine($"\nИсключение: {message}");
-						}
-					},
-				};
+						Console.WriteLine($"\nИсключение: {message}");
+					}
+				},
+			};
 
 			Car car = new Car();
 
@@ -139,7 +139,7 @@ namespace LR3
 		public static Helicopter ReadHelicopter()
 		{
 			Dictionary<Type, Action<string>> catchDictionary =
-				new Dictionary<Type, Action<string>>()
+			new Dictionary<Type, Action<string>>()
 			{
 				{
 					typeof(ArgumentException),
@@ -195,7 +195,7 @@ namespace LR3
 		public static HybridCar ReadHybridCar()
 		{
 			Dictionary<Type, Action<string>> catchDictionary =
-				new Dictionary<Type, Action<string>>()
+			new Dictionary<Type, Action<string>>()
 			{
 				{
 					typeof(ArgumentException),
@@ -261,7 +261,7 @@ namespace LR3
 		public static Engine ReadEngine(TransportBase transport)
 		{
 			Dictionary<Type, Action<string>> catchDictionary =
-				new Dictionary<Type, Action<string>>()
+			new Dictionary<Type, Action<string>>()
 			{
 				{
 					typeof(ArgumentOutOfRangeException),
@@ -362,7 +362,7 @@ namespace LR3
 		public static Engine ReadEngine(Engine engine)
 		{
 			Dictionary<Type, Action<string>> catchDictionary =
-				new Dictionary<Type, Action<string>>()
+			new Dictionary<Type, Action<string>>()
 			{
 				{
 					typeof(ArgumentOutOfRangeException),
@@ -424,7 +424,7 @@ namespace LR3
 		public static void СalculateСonsumptionFuel(TransportBase transport)
 		{
 			Dictionary<Type, Action<string>> catchDictionary =
-				new Dictionary<Type, Action<string>>()
+			new Dictionary<Type, Action<string>>()
 			{
 				{
 					typeof(ArgumentOutOfRangeException),
