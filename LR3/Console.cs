@@ -176,7 +176,7 @@ namespace LR3
 
 				()=>
 				{
-					Console.Write($"\nВведите массу вертолета в тоннах" +
+					Console.Write($"\nВведите массу вертолета в кг" +
 						$" (нажмите Enter): ");
 					helicopter.Mass = Convert.ToInt32(Console.ReadLine());
 				},

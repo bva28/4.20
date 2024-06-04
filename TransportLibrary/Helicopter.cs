@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace TransportLibrary
 {
-	//TODO: XML
+	//TODO: XML+
+	/// <summary>
+	/// Класс Вертолёт
+	/// </summary>
 	public class Helicopter : TransportBase
 	{
 		/// <summary>

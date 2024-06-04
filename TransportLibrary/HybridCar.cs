@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace TransportLibrary
 {
-	//TODO: XML
+	//TODO: XML+
+	/// <summary>
+	/// Класс Гибрид
+	/// </summary>
 	public class HybridCar : Car
 	{
 		/// <summary>
@@ -66,12 +69,14 @@ namespace TransportLibrary
 		/// <returns></returns>
 		public double CalculateFuel(double distance)
 		{
-			double coeffСonsumptionBase = Engine.СalculateExpense();
+            double coeffСonsumptionBase = Engine.СalculateExpense();
 
-			double coeffСonsumptionAdd = ElectricMotorPower.СalculateExpense();
+            double coeffСonsumptionAdd = ElectricMotorPower.СalculateExpense();
 
-			return ((distance * coeffСonsumptionAdd * (RatioMass * Mass))
-				- (distance * coeffСonsumptionBase * (RatioMass * Mass)));
-		}
+            double fuelConsumption = ((distance * coeffСonsumptionAdd * (RatioMass * Mass))
+            - (distance * coeffСonsumptionBase * (RatioMass * Mass)));
+
+            return fuelConsumption < 0 ? Math.Abs(fuelConsumption) * 0.05 : fuelConsumption;
+        }
 	}
 }

@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace TransportLibrary
 {
-	//TODO: XML
-	public enum EngineType
+    //TODO: XML+
+    /// <summary>
+    /// EngineType 
+    /// </summary>
+    public enum EngineType
 	{
 		/// <summary>
 		/// Дизельный.
