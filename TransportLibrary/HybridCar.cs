@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace TransportLibrary
 {
-	//TODO: XML+
 	/// <summary>
 	/// Класс Гибрид
 	/// </summary>
