@@ -1,83 +1,102 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace TransportLibrary
 {
-	/// <summary>
-	/// Класс Двигатель.
-	/// </summary>
-	public class Engine
-	{
-		/// <summary>
-		/// Свойство вид двигателя.
-		/// </summary>
-		public EngineType EngineType
-		{
-			get; set;
-		}
+    /// <summary>
+    /// Класс Двигатель.
+    /// </summary>
+    public class Engine
+    {
+        /// <summary>
+        /// Мощность двигателя.
+        /// </summary>
+        private double _power;
 
-		/// <summary>
-		/// Мощность двигателя.
-		/// </summary>
-		private int _power;
+        /// <summary>
+        /// Словарь тип топлива.
+        /// </summary>
+        private static readonly Dictionary<EngineType, string> _typesFuel = new()
+        {
+            {EngineType.Petrol, "Бензин"},
+            {EngineType.Diesel, "Дизель"},
+            {EngineType.Electricity, "Электричество"},
+            {EngineType.GasTurbine, "Газтурбинный"}
+        };
 
-		/// <summary>
-		/// Свойство Мощность двигателя.
-		/// </summary>
-		public int Power
-		{
-			get => _power;
-			set
-			{
-				if (value <= 0)
-				{
-					throw new ArgumentException
-						("Мощность должна быть положительной");
-				}
+        /// <summary>
+        /// Конструктор класса Двигатель.
+        /// </summary>
+        /// <param name="power">Мощность двигателя.</param>
+        /// <param name="engineType">Вид топлива.</param>
+        public Engine(double power, EngineType engineType)
+        {
+            Power = power;
+            EngineType = engineType;
+        }
 
-				_power = value;
-			}
-		}
+        /// <summary>
+        /// Конструктор с параметрами по умолчанию.
+        /// </summary>
+        public Engine() : this(100, EngineType.Petrol)
+        { }
 
-		/// <summary>
-		/// Конструктор класса двигатель.
-		/// </summary>
-		/// <param name="power">Мощность.</param>
-		/// <param name="engineType">Тип двигателя.</param>
-		public Engine(int power, EngineType engineType)
-		{
-			Power = power;
-			EngineType = engineType;
-		}
+        /// <summary>
+        /// Свойство Мощность двигателя.
+        /// </summary>
+        public double Power
+        {
+            get => _power;
+            set
+            {
+                if (double.IsNaN(value))
+                {
+                    throw new ArgumentException
+                        ("Мощность должна быть задана");
+                }
 
-		/// <summary>
-		/// Конструктор с параметрами по умолчанию.
-		/// </summary>
-		public Engine() : this(100, EngineType.Petrol)
-		{ }
+                if (value <= 0)
+                {
+                    throw new ArgumentException
+                        ("Мощность должна быть положительной");
+                }
 
-		/// <summary>
-		/// Определение коэфициента расхода в зависимости от объема и типа двигателя.
-		/// </summary>
-		/// <returns>Коэффициент расхода.</returns>
-		public double СalculateExpense()
-		{
-			double сonsumptionСapacity = 0.1 * Power;
+                _power = value;
+            }
+        }
 
-			Dictionary<EngineType, double> сonsumptionFuel = new()
-			{
-				{EngineType.Diesel, 0.75},
-				{EngineType.Petrol, 1},
-				{EngineType.Electricity, 0.5},
-				{EngineType.GasTurbine, 2},
-			};
+        /// <summary>
+        /// Свойство Вид топлива.
+        /// </summary>
+        public EngineType EngineType
+        {
+            get; set;
+        }
 
-			double сonsumption = (сonsumptionСapacity * сonsumptionFuel[EngineType])/100;
+        /// <summary>
+        /// Информация о двигателе.
+        /// </summary>
+        public string Info
+        {
+            get => $"Тип топлива: {_typesFuel[EngineType]}\nМощность: {Power} л.с.";
+        }
 
-			return сonsumption;
-		}
-	}
+        /// <summary>
+        /// Расчет коэффициента расхода.
+        /// </summary>
+        /// <returns>Коэффициент расхода.</returns>
+        public double СalculateConsumption()
+        {
+            double сonsumptionСapacity = 0.1 * Power;
+
+            Dictionary<EngineType, double> сonsumptionFuel = new()
+            {
+                {EngineType.Diesel, 0.75},
+                {EngineType.Petrol, 1},
+                {EngineType.Electricity, 0.5},
+                {EngineType.GasTurbine, 2},
+            };
+
+            double сonsumption = (сonsumptionСapacity * сonsumptionFuel[EngineType])/100;
+
+            return сonsumption;
+        }
+    }
 }

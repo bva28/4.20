@@ -1,34 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace TransportLibrary
 {
     /// <summary>
-    /// EngineType 
+    /// EngineType.
     /// </summary>
     public enum EngineType
-	{
-		/// <summary>
-		/// Дизельный.
-		/// </summary>
-		Diesel,
-
-		/// <summary>
-		/// Бензиновый.
-		/// </summary>
+    {
+        /// <summary>
+        /// Бензиновый.
+        /// </summary>
+        [Description("Бензиновый")]
         Petrol,
 
-		/// <summary>
-		/// Электрический.
-		/// </summary>
+        /// <summary>
+        /// Дизельный.
+        /// </summary>
+        [Description("Дизельный")]
+        Diesel,
+
+        /// <summary>
+        /// Электричество.
+        /// </summary>
+        [Description("Электрический")]
         Electricity,
 
-		/// <summary>
-		/// Газотурбинный.
-		/// </summary>
-		GasTurbine
-	}
+        /// <summary>
+        /// Газотурбинный.
+        /// </summary>
+        [Description("Газотурбинный")]
+        GasTurbine
+    }
 }

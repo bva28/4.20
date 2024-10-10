@@ -1,71 +1,83 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace TransportLibrary
 {
-	/// <summary>
-	/// Класс  Машина.
-	/// </summary>
-	public class Car : TransportBase
-	{
-		/// <summary>
-		/// Двигатель.
-		/// </summary>
-		private Engine _engine;
+    /// <summary>
+    /// Класс Машина.
+    /// </summary>
+    public class Car : TransportBase
+    {
+        /// <summary>
+        /// Двигатель.
+        /// </summary>
+        private Engine _engine;
 
-		/// <summary>
-		/// Свойство Двигатель.
-		/// </summary>
-		public Engine Engine
-		{
-			get => _engine;
-			set
-			{
-				if (value is null)
-				{
-					throw new NullReferenceException
-							  ("Передано null");
-				}
+        /// <summary>
+        /// Конструктор класса Машина.
+        /// </summary>
+        /// <param name="engine">Двигатель.</param>
+        /// <param name="mass">Масса (т).</param>
+        public Car(Engine engine, double mass)
+        {
+            Engine = engine;
+            Mass = mass;
+        }
 
-				_engine = value;
-			}
-		}
+        /// <summary>
+        /// Конструктор с параметрами по умолчанию.
+        /// </summary>
+        public Car() : this(new Engine(100, EngineType.Petrol), 1)
+        { }
 
-		/// <summary>
+        /// <summary>
+        /// Свойство Двигатель.
+        /// </summary>
+        public Engine Engine
+        {
+            get => _engine;
+            set
+            {
+                if (value is null)
+                {
+                    throw new NullReferenceException
+                              ("Передано null");
+                }
+
+                _engine = value;
+            }
+        }
+
+        /// <summary>
 		/// Коэфициент пересчета массы.
 		/// </summary>
-		public override double RatioMass { get; } = 0.001;
+		private protected override double RatioMass { get; } = 1;
 
-		/// <summary>
-		/// Конструктор класса Машина.
-		/// </summary>
-		/// <param name="motor">Двигатель.</param>
-		/// <param name="mass">Масса (кг).</param>
-		public Car(Engine engine, int mass)
-		{
-			Engine = engine;
-			Mass = mass;
-		}
+        /// <inheritdoc/>
+        public override string Info
+        {
+            get => $"{Engine.Info} \nМасса: {Mass} т.";
+        }
 
-		/// <summary>
-		/// Конструктор с параметрами по умолчанию.
-		/// </summary>
-		public Car() : this(new Engine(100, EngineType.Petrol), 1000)
-		{ }
+        /// <inheritdoc/>
+        public override string TypeTransport
+        {
+            get => "Машина";
+        }
 
-		/// <summary>
-		/// Переопределенный метод расчета расхода топлива.
-		/// </summary>
-		/// <param name="distance">Расстояние (км).</param>
-		/// <returns>Расход топлива (л).</returns>
-		public override double CalculateFuel(double distance)
-		{
-			double coeffСonsumption = Engine.СalculateExpense();
+        /// <inheritdoc/>
+        public override string FuelConsumption
+        {
+            get => $"{Math.Round(CalculateFuel(100), 2)} л. на 100 км.";
+        }
 
-			return distance * coeffСonsumption * (RatioMass * Mass);
-		}
-	}
+        /// <summary>
+        /// Переопределенный метод расчета расхода топлива.
+        /// </summary>
+        /// <param name="distance">Расстояние (км).</param>
+        /// <returns>Расход топлива (л).</returns>
+        public override double CalculateFuel(double distance)
+        {
+            double coeffСonsumption = Engine.СalculateConsumption();
+
+            return distance * coeffСonsumption * (RatioMass * Mass);
+        }
+    }
 }
