@@ -5,6 +5,7 @@ using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace View
 {
+	//TODO: rewrite
 	/// <summary>
 	/// Класс DataForm.
 	/// </summary>
@@ -100,7 +101,7 @@ namespace View
 					_typesTransports[_comboBoxTransport.Text];
 
 				TransportBase transport = null;
-
+				//BUG: ограничение данных для ввода, чтобы не получить INF
 				switch (typeTransport)
 				{
 					case TypeTransport.Car:
@@ -348,10 +349,12 @@ namespace View
 			_textBoxHybridCapacity.Text = Convert.ToString(mass * 80);
 		}
 
+		//TODO: remove?
 		private void _comboBoxTransport_SelectedIndexChanged(object sender, EventArgs e)
 		{
 
 		}
+		//TODO: remove?
 
 		private void DataForm_Load(object sender, EventArgs e)
 		{

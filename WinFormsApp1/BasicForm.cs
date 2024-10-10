@@ -4,6 +4,8 @@ using TransportLibrary;
 
 namespace View
 {
+    //TODO: rewrite
+    //TODO: rename
     /// <summary>
     /// Класс BasicForm.
     /// </summary>
