@@ -165,7 +165,6 @@ namespace View
 			_comboBoxTransport.Name = "_comboBoxTransport";
 			_comboBoxTransport.Size = new Size(216, 28);
 			_comboBoxTransport.TabIndex = 3;
-			_comboBoxTransport.SelectedIndexChanged += _comboBoxTransport_SelectedIndexChanged;
 			// 
 			// _comboBoxFuel
 			// 
@@ -234,6 +233,7 @@ namespace View
 			// _textBoxCapacity
 			// 
 			_textBoxCapacity.Location = new Point(20, 100);
+			_textBoxCapacity.MaxLength = 10;
 			_textBoxCapacity.Name = "_textBoxCapacity";
 			_textBoxCapacity.Size = new Size(216, 27);
 			_textBoxCapacity.TabIndex = 1;
@@ -241,6 +241,7 @@ namespace View
 			// _textBoxMass
 			// 
 			_textBoxMass.Location = new Point(20, 153);
+			_textBoxMass.MaxLength = 10;
 			_textBoxMass.Name = "_textBoxMass";
 			_textBoxMass.Size = new Size(216, 27);
 			_textBoxMass.TabIndex = 3;
@@ -248,6 +249,7 @@ namespace View
 			// _textBoxHybridCapacity
 			// 
 			_textBoxHybridCapacity.Location = new Point(20, 100);
+			_textBoxHybridCapacity.MaxLength = 10;
 			_textBoxHybridCapacity.Name = "_textBoxHybridCapacity";
 			_textBoxHybridCapacity.Size = new Size(206, 27);
 			_textBoxHybridCapacity.TabIndex = 1;

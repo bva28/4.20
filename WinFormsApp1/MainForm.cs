@@ -1,0 +1,257 @@
+using System.ComponentModel;
+using System.Xml.Serialization;
+using TransportLibrary;
+
+namespace View
+{
+	//TODO: rewrite+
+	//TODO: rename+
+	/// <summary>
+	/// Класс MainForm.
+	/// </summary>
+	public partial class MainForm : System.Windows.Forms.Form
+	{
+		/// <summary>
+		/// Лист для заполнения таблицы.
+		/// </summary>
+		private BindingList<TransportBase> _transportList =
+			new BindingList<TransportBase>();
+
+		/// <summary>
+		/// Отфильтрованный лист для заполнения таблицы.
+		/// </summary>
+		private BindingList<TransportBase> _filteredTransportList;
+
+		/// <summary>
+		///  Поле для хранения состояния формы DataForm.
+		/// </summary>
+		private bool _isDataFormOpen = false;
+
+		/// <summary>
+		///  Поле для хранения состояния формы FindForm.
+		/// </summary>
+		private bool _isFindFormOpen = false;
+
+		/// <summary>
+		/// Поле для сохранения и открытия файла.
+		/// </summary>
+		private readonly XmlSerializer _serializerXml =
+			new XmlSerializer(typeof(BindingList<TransportBase>));
+
+		/// <summary>
+		/// Конструктор BasicForm.
+		/// </summary>
+		public MainForm()
+		{
+			InitializeComponent();
+
+			FillingDataGridView(_transportList);
+
+			_buttonAddTransport.Click += AddTransportButtonClick;
+
+			_buttonRemoveTransport.Click += RemoveTransportButtonClick;
+
+			_buttonFindTransport.Click += FindTransportButtonClick;
+
+			_buttonResetTransport.Click += ResetedFilter;
+
+			_buttonSaveTransport.Click += SaveFile;
+
+			_buttonOpenTransport.Click += OpenFile;
+		}
+
+		/// <summary>
+		/// Обработчик отмены добавления данных в лист.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="transportBase"></param>
+		private void CancelTransport(object sender, EventArgs transportBase)
+		{
+			TransportAddedEventArgs addedEventArgs =
+				transportBase as TransportAddedEventArgs;
+
+			_transportList.Remove(addedEventArgs?.TransportBase);
+		}
+
+		/// <summary>
+		/// Обработчик добавления данных в лист.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="transportBase"></param>
+		private void AddedTransport(object sender, EventArgs transportBase)
+		{
+			TransportAddedEventArgs addedEventArgs =
+				transportBase as TransportAddedEventArgs;
+
+			_transportList.Add(addedEventArgs?.TransportBase);
+		}
+
+		/// <summary>
+		/// Метод нажатия на кнопку "Добавить".
+		/// </summary>
+		/// <param name="sender">Событие.</param>
+		/// <param name="e">Данные о событие.</param>
+		private void AddTransportButtonClick(object sender, EventArgs e)
+		{
+			if (!_isDataFormOpen)
+			{
+				_isDataFormOpen = true;
+
+				DataForm DataForm = new DataForm();
+				DataForm.FormClosed += (s, args) => { _isDataFormOpen = false; };
+				DataForm.TransportAdded += AddedTransport;
+				DataForm.TransportCancel += CancelTransport;
+				DataForm.Show();
+			}
+		}
+
+		/// <summary>
+		/// Метод нажатия на кнопку "Удалить"
+		/// </summary>
+		/// <param name="sender">Событие.</param>
+		/// <param name="e">Данные о событие.</param>
+		private void RemoveTransportButtonClick(object sender, EventArgs e)
+		{
+			if (_gridControlTransport.SelectedRows.Count > 0)
+			{
+				_gridControlTransport.SelectionMode =
+					DataGridViewSelectionMode.FullRowSelect;
+
+				foreach (DataGridViewRow row in
+					_gridControlTransport.SelectedRows)
+				{
+					_gridControlTransport.Rows.Remove(row);
+				}
+			}
+			else
+			{
+				MessageBox.Show("Выберите строку для удаления.",
+					"Предупреждение", MessageBoxButtons.OK,
+					MessageBoxIcon.Warning);
+			}
+		}
+
+		/// <summary>
+		/// Метод заполнения таблицы "Список транспорта".
+		/// </summary>
+		private void FillingDataGridView(BindingList<TransportBase> transportList)
+		{
+			_gridControlTransport.DataSource = transportList;
+		}
+
+		/// <summary>
+		/// Метод нажатия на кнопку "Найти"
+		/// </summary>
+		/// <param name="sender">Событие.</param>
+		/// <param name="e">Данные о событие.</param>
+		private void FindTransportButtonClick(object sender, EventArgs e)
+		{
+			if (!_isFindFormOpen)
+			{
+				_isFindFormOpen = true;
+
+				FilterForm findForm = new FilterForm(_transportList);
+				findForm.FormClosed += (s, args) => { _isFindFormOpen = false; };
+				findForm.TransportFiltered += FilteredTransport;
+				findForm.Show();
+			}
+		}
+
+		/// <summary>
+		/// Обработчик фильтрации данных.
+		/// </summary>
+		/// <param name="sender">Событие.</param>
+		/// <param name="transportList">Данные о событие.</param>
+		private void FilteredTransport(object sender, EventArgs transportList)
+		{
+			TransportFilterEventArgs filterEventArgs =
+				transportList as TransportFilterEventArgs;
+
+			_filteredTransportList = filterEventArgs?.FilteredTransportList;
+
+			FillingDataGridView(_filteredTransportList);
+		}
+
+		/// <summary>
+		/// Метод нажатия на кнопку "Сбросить".
+		/// </summary>
+		/// <param name="sender">Событие.</param>
+		/// <param name="e">Данные о событие.</param>
+		private void ResetedFilter(object sender, EventArgs e)
+		{
+			FillingDataGridView(_transportList);
+		}
+
+		/// <summary>
+		/// Метод для сохранения данных в файл.
+		/// </summary>
+		/// <param name="sender">Событие.</param>
+		/// <param name="e">Данные о событие.</param>
+		private void SaveFile(object sender, EventArgs e)
+		{
+			if (!_transportList.Any() || _transportList is null)
+			{
+				MessageBox.Show("Список пуст!", "Предупреждение",
+					MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return;
+			}
+
+			SaveFileDialog saveFileDialog = new SaveFileDialog
+			{
+				Filter = "Файлы (*tran.)|*.tran|Все файлы (*.*)|*.*"
+			};
+
+			if (saveFileDialog.ShowDialog() == DialogResult.OK)
+			{
+				string filePath = saveFileDialog.FileName.ToString();
+
+				using (var file = File.Create(filePath))
+				{
+					_serializerXml.Serialize(file, _transportList);
+				}
+			}
+		}
+
+		/// <summary>
+		/// Метод для открытия данных из файла.
+		/// </summary>
+		/// <param name="sender">Событие.</param>
+		/// <param name="e">Данные о событие.</param>
+		private void OpenFile(object sender, EventArgs e)
+		{
+			OpenFileDialog openFileDialog = new OpenFileDialog
+			{
+				Filter = "Файлы (*.tran)|*.tran|Все файлы (*.*)|*.*"
+			};
+
+			if (openFileDialog.ShowDialog() != DialogResult.OK) return;
+
+			string filePath = openFileDialog.FileName.ToString();
+
+			try
+			{
+				using (var file = new StreamReader(filePath))
+				{
+					_transportList = (BindingList<TransportBase>)
+						_serializerXml.Deserialize(file);
+				}
+
+				_gridControlTransport.DataSource = _transportList;
+			}
+			catch (Exception ex)
+			{
+				// Основное сообщение об ошибке
+				string errorMessage = $"Не удалось загрузить файл!\nОшибка: {ex.Message}";
+
+				// Добавление информации о внутреннем исключении, если оно существует
+				if (ex.InnerException != null)
+				{
+					errorMessage += $"\nПодробности: {ex.InnerException.Message}";
+				}
+
+				MessageBox.Show(errorMessage, "Предупреждение",
+					MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			}
+		}
+	}
+}

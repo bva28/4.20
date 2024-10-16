@@ -94,7 +94,7 @@ namespace TransportLibrary
                 {EngineType.GasTurbine, 2},
             };
 
-            double сonsumption = (сonsumptionСapacity * сonsumptionFuel[EngineType])/100;
+            double сonsumption = (сonsumptionСapacity * сonsumptionFuel[EngineType]) / 100;
 
             return сonsumption;
         }

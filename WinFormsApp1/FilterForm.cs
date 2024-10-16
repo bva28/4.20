@@ -4,7 +4,7 @@ using TransportLibrary;
 
 namespace View
 {
-    //TODO: rewrite
+    //TODO: rewrite+
     /// <summary>
     /// Класс FilterForm.
     /// </summary>

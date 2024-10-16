@@ -5,7 +5,7 @@ using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace View
 {
-	//TODO: rewrite
+	//TODO: rewrite+
 	/// <summary>
 	/// Класс DataForm.
 	/// </summary>
@@ -349,17 +349,8 @@ namespace View
 			_textBoxHybridCapacity.Text = Convert.ToString(mass * 80);
 		}
 
-		//TODO: remove?
-		private void _comboBoxTransport_SelectedIndexChanged(object sender, EventArgs e)
-		{
-
-		}
-		//TODO: remove?
-
-		private void DataForm_Load(object sender, EventArgs e)
-		{
-
-		}
+		//TODO: remove?+
+		//TODO: remove?+
 #endif
 	}
 }
