@@ -101,7 +101,6 @@ namespace View
 					_typesTransports[_comboBoxTransport.Text];
 
 				TransportBase transport = null;
-				//BUG: ограничение данных для ввода, чтобы не получить INF
 				switch (typeTransport)
 				{
 					case TypeTransport.Car:
