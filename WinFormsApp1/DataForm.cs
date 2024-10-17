@@ -101,6 +101,7 @@ namespace View
 					_typesTransports[_comboBoxTransport.Text];
 
 				TransportBase transport = null;
+				//TODO: RSDN
 				switch (typeTransport)
 				{
 					case TypeTransport.Car:
@@ -178,21 +179,19 @@ namespace View
 
 			switch (typeTransport)
 			{
+				//TODO: RSDN
 				case TypeTransport.Car:
 					{
 						_groupBoxDataHybridCar.Visible = false;
 						_groupBoxDataHelicopter.Visible = false;
 						break;
 					}
-
 				case TypeTransport.HybridCar:
 					{
 						_groupBoxDataHybridCar.Visible = true;
 						_groupBoxDataHelicopter.Visible = false;
 						break;
 					}
-
-
 				case TypeTransport.Helicopter:
 					{
 						_groupBoxDataHybridCar.Visible = false;
@@ -226,6 +225,7 @@ namespace View
 			comboBox.SelectedItem = dataSource.GetValue(0);
 		}
 
+		//TODO: RSDN
 		/// <summary>
 		/// Заполнение ComboBoxFuel массивом данных
 		/// в соответствии с выбранным типом транспорта.
@@ -347,9 +347,6 @@ namespace View
 
 			_textBoxHybridCapacity.Text = Convert.ToString(mass * 80);
 		}
-
-		//TODO: remove?+
-		//TODO: remove?+
 #endif
 	}
 }
