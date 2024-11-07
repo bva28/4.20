@@ -7,7 +7,7 @@ namespace View
 	//TODO: rewrite+
 	//TODO: rename+
 	/// <summary>
-	/// Класс MainForm.
+	/// Форма расчета расхода топлива.
 	/// </summary>
 	public partial class MainForm : System.Windows.Forms.Form
 	{
@@ -31,6 +31,11 @@ namespace View
 		///  Поле для хранения состояния формы FindForm.
 		/// </summary>
 		private bool _isFindFormOpen = false;
+
+		/// <summary>
+		/// Поле для хранения состояния фильтра.
+		/// </summary>
+		private bool _isFiltered = false;
 
 		/// <summary>
 		/// Поле для сохранения и открытия файла.
@@ -58,7 +63,8 @@ namespace View
 			_buttonSaveTransport.Click += SaveFile;
 
 			_buttonOpenTransport.Click += OpenFile;
-		}
+            DeactivateElements();
+        }
 
 		/// <summary>
 		/// Обработчик отмены добавления данных в лист.
@@ -72,6 +78,16 @@ namespace View
 
 			_transportList.Remove(addedEventArgs?.TransportBase);
 		}
+
+		private void DeactivateElements()
+		{
+            _buttonAddTransport.Enabled = !_isFindFormOpen &&
+                !_isFiltered && !_isDataFormOpen;
+            _buttonFindTransport.Enabled = !_isDataFormOpen &&
+                !_isFindFormOpen;
+            _buttonSaveTransport.Enabled = !_isFiltered;
+            _buttonOpenTransport.Enabled = !_isFiltered;
+        }
 
 		/// <summary>
 		/// Обработчик добавления данных в лист.
@@ -96,9 +112,13 @@ namespace View
 			if (!_isDataFormOpen)
 			{
 				_isDataFormOpen = true;
-
-				DataForm DataForm = new DataForm();
-				DataForm.FormClosed += (s, args) => { _isDataFormOpen = false; };
+                DeactivateElements();
+                DataForm DataForm = new DataForm();
+				DataForm.FormClosed += (s, args) => 
+				{ 
+					_isDataFormOpen = false;
+                    DeactivateElements();
+                };
 				DataForm.TransportAdded += AddedTransport;
 				DataForm.TransportCancel += CancelTransport;
 				DataForm.Show();
@@ -149,9 +169,13 @@ namespace View
 			if (!_isFindFormOpen)
 			{
 				_isFindFormOpen = true;
-
-				FilterForm findForm = new FilterForm(_transportList);
-				findForm.FormClosed += (s, args) => { _isFindFormOpen = false; };
+                DeactivateElements();
+                FilterForm findForm = new FilterForm(_transportList);
+				findForm.FormClosed += (s, args) => 
+				{ 
+					_isFindFormOpen = false;
+                    DeactivateElements();
+                };
 				findForm.TransportFiltered += FilteredTransport;
 				findForm.Show();
 			}
@@ -168,8 +192,9 @@ namespace View
 				transportList as TransportFilterEventArgs;
 
 			_filteredTransportList = filterEventArgs?.FilteredTransportList;
-
-			FillingDataGridView(_filteredTransportList);
+            _isFiltered = true;
+            DeactivateElements();
+            FillingDataGridView(_filteredTransportList);
 		}
 
 		/// <summary>
@@ -180,7 +205,9 @@ namespace View
 		private void ResetedFilter(object sender, EventArgs e)
 		{
 			FillingDataGridView(_transportList);
-		}
+            _isFiltered = false;
+            DeactivateElements();
+        }
 
 		/// <summary>
 		/// Метод для сохранения данных в файл.

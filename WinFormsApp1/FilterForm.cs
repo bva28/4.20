@@ -6,7 +6,7 @@ namespace View
 {
     //TODO: rewrite+
     /// <summary>
-    /// Класс FilterForm.
+    /// Форма фильтрации.
     /// </summary>
     public partial class FilterForm : Form
     {
