@@ -4,8 +4,6 @@ using TransportLibrary;
 
 namespace View
 {
-	//TODO: rewrite+
-	//TODO: rename+
 	/// <summary>
 	/// Форма расчета расхода топлива.
 	/// </summary>
@@ -79,6 +77,7 @@ namespace View
 			_transportList.Remove(addedEventArgs?.TransportBase);
 		}
 
+		//TODO: XML
 		private void DeactivateElements()
 		{
             _buttonAddTransport.Enabled = !_isFindFormOpen &&

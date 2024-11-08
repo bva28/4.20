@@ -4,7 +4,6 @@ using TransportLibrary;
 
 namespace View
 {
-    //TODO: rewrite+
     /// <summary>
     /// Форма фильтрации.
     /// </summary>

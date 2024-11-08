@@ -5,7 +5,6 @@ using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace View
 {
-	//TODO: rewrite+
 	/// <summary>
 	/// Форма ввода данных.
 	/// </summary>
@@ -101,12 +100,12 @@ namespace View
 					_typesTransports[_comboBoxTransport.Text];
 
 				TransportBase transport = null;
-				//TODO: RSDN+
 				switch (typeTransport)
 				{
 					case TypeTransport.Car:
 					{
 						Engine motor = new Engine();
+							//TODO: RSDN
 						motor.EngineType = _typesFuel[(string)_comboBoxFuel.SelectedItem];
 						motor.Power = Convert.ToDouble(_textBoxCapacity.Text);
 						double mass = Convert.ToDouble(_textBoxMass.Text);
@@ -121,10 +120,12 @@ namespace View
 					case TypeTransport.HybridCar:
 					{
 						Engine motor = new Engine();
+							//TODO: RSDN
 						motor.EngineType = _typesFuel[(string)_comboBoxFuel.SelectedItem];
 						motor.Power = Convert.ToDouble(_textBoxCapacity.Text);
 
 						Engine additionalMotor = new Engine();
+							//TODO: RSDN
 						additionalMotor.EngineType = _typesFuel[(string)_comboBoxHybridFuel.SelectedItem];
 						additionalMotor.Power = Convert.ToDouble(_textBoxHybridCapacity.Text);
 
@@ -178,7 +179,6 @@ namespace View
 
 			switch (typeTransport)
 			{
-				//TODO: RSDN+
 				case TypeTransport.Car:
 				{
 					_groupBoxDataHybridCar.Visible = false;
@@ -224,7 +224,6 @@ namespace View
 			comboBox.SelectedItem = dataSource.GetValue(0);
 		}
 
-		//TODO: RSDN+
 		/// <summary>
 		/// Заполнение ComboBoxFuel массивом данных
 		/// в соответствии с выбранным типом транспорта.
@@ -312,8 +311,9 @@ namespace View
 		{
 			TextBox textBox = (TextBox)sender;
 
-			if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-				e.KeyChar != ',')
+			if (!char.IsControl(e.KeyChar) 
+				&& !char.IsDigit(e.KeyChar) 
+				&& e.KeyChar != ',')
 			{
 				e.Handled = true;
 			}
