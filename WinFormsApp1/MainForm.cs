@@ -78,6 +78,9 @@ namespace View
 		}
 
 		//TODO: XML
+		/// <summary>
+		/// Метод деактивации элементов.
+		/// </summary>
 		private void DeactivateElements()
 		{
             _buttonAddTransport.Enabled = !_isFindFormOpen &&

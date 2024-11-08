@@ -105,8 +105,8 @@ namespace View
 					case TypeTransport.Car:
 					{
 						Engine motor = new Engine();
-							//TODO: RSDN
-						motor.EngineType = _typesFuel[(string)_comboBoxFuel.SelectedItem];
+						motor.EngineType = 
+								_typesFuel[(string)_comboBoxFuel.SelectedItem];
 						motor.Power = Convert.ToDouble(_textBoxCapacity.Text);
 						double mass = Convert.ToDouble(_textBoxMass.Text);
 
@@ -120,14 +120,15 @@ namespace View
 					case TypeTransport.HybridCar:
 					{
 						Engine motor = new Engine();
-							//TODO: RSDN
-						motor.EngineType = _typesFuel[(string)_comboBoxFuel.SelectedItem];
+						motor.EngineType = 
+								_typesFuel[(string)_comboBoxFuel.SelectedItem];
 						motor.Power = Convert.ToDouble(_textBoxCapacity.Text);
 
 						Engine additionalMotor = new Engine();
-							//TODO: RSDN
-						additionalMotor.EngineType = _typesFuel[(string)_comboBoxHybridFuel.SelectedItem];
-						additionalMotor.Power = Convert.ToDouble(_textBoxHybridCapacity.Text);
+						additionalMotor.EngineType = 
+								_typesFuel[(string)_comboBoxHybridFuel.SelectedItem];
+						additionalMotor.Power = 
+								Convert.ToDouble(_textBoxHybridCapacity.Text);
 
 						double mass = Convert.ToDouble(_textBoxMass.Text);
 
@@ -142,7 +143,8 @@ namespace View
 					case TypeTransport.Helicopter:
 					{
 						Engine motor = new Engine();
-						motor.EngineType = _typesFuel[(string)_comboBoxFuel.SelectedItem];
+						motor.EngineType = 
+								_typesFuel[(string)_comboBoxFuel.SelectedItem];
 						motor.Power = Convert.ToDouble(_textBoxCapacity.Text);
 						double mass = Convert.ToDouble(_textBoxMass.Text);
 

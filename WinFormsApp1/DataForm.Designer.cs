@@ -107,8 +107,10 @@ namespace View
 		{
 			_buttonAgree = new Button();
 			_buttonCancel = new Button();
+#if DEBUG
 			_buttonRandom = new Button();
-			_comboBoxTransport = new ComboBox();
+#endif
+            _comboBoxTransport = new ComboBox();
 			_comboBoxFuel = new ComboBox();
 			_comboBoxHybridFuel = new ComboBox();
 			_labelTransport = new Label();
@@ -146,9 +148,10 @@ namespace View
 			_buttonCancel.TabIndex = 1;
 			_buttonCancel.Text = "Отмена";
 			_buttonCancel.UseVisualStyleBackColor = false;
-			// 
-			// _buttonRandom
-			// 
+            // 
+            // _buttonRandom
+            //
+#if DEBUG
 			_buttonRandom.BackColor = SystemColors.ButtonHighlight;
 			_buttonRandom.ForeColor = SystemColors.ActiveCaptionText;
 			_buttonRandom.Location = new Point(12, 300);
@@ -157,10 +160,11 @@ namespace View
 			_buttonRandom.TabIndex = 2;
 			_buttonRandom.Text = "Заполнить";
 			_buttonRandom.UseVisualStyleBackColor = false;
-			// 
-			// _comboBoxTransport
-			// 
-			_comboBoxTransport.DropDownStyle = ComboBoxStyle.DropDownList;
+#endif
+            // 
+            // _comboBoxTransport
+            // 
+            _comboBoxTransport.DropDownStyle = ComboBoxStyle.DropDownList;
 			_comboBoxTransport.Location = new Point(32, 43);
 			_comboBoxTransport.Name = "_comboBoxTransport";
 			_comboBoxTransport.Size = new Size(216, 28);
@@ -298,8 +302,10 @@ namespace View
 			Controls.Add(_labelTransport);
 			Controls.Add(_buttonAgree);
 			Controls.Add(_buttonCancel);
+#if DEBUG
 			Controls.Add(_buttonRandom);
-			Controls.Add(_comboBoxTransport);
+#endif
+            Controls.Add(_comboBoxTransport);
 			Controls.Add(_groupBoxData);
 			Controls.Add(_groupBoxDataHybridCar);
 			Controls.Add(_groupBoxDataHelicopter);
@@ -315,6 +321,6 @@ namespace View
 			ResumeLayout(false);
 		}
 
-		#endregion
+#endregion
 	}
 }
