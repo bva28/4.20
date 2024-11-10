@@ -77,7 +77,7 @@ namespace View
 			_transportList.Remove(addedEventArgs?.TransportBase);
 		}
 
-		//TODO: XML
+		//TODO+: XML
 		/// <summary>
 		/// Метод деактивации элементов.
 		/// </summary>
@@ -134,24 +134,23 @@ namespace View
 		/// <param name="e">Данные о событие.</param>
 		private void RemoveTransportButtonClick(object sender, EventArgs e)
 		{
-			if (_gridControlTransport.SelectedRows.Count > 0)
-			{
-				_gridControlTransport.SelectionMode =
-					DataGridViewSelectionMode.FullRowSelect;
-
-				foreach (DataGridViewRow row in
-					_gridControlTransport.SelectedRows)
-				{
-					_gridControlTransport.Rows.Remove(row);
-				}
-			}
-			else
-			{
-				MessageBox.Show("Выберите строку для удаления.",
-					"Предупреждение", MessageBoxButtons.OK,
-					MessageBoxIcon.Warning);
-			}
-		}
+            if (_gridControlTransport.SelectedCells.Count != 0)
+            {
+                foreach (DataGridViewRow row in
+                    _gridControlTransport.SelectedRows)
+                {
+                    if (row.DataBoundItem is TransportBase transport)
+                    {
+                        _transportList.Remove(transport);
+                        if (_filteredTransportList is not null
+                            && _filteredTransportList.Count > 0)
+                        {
+                            _filteredTransportList.Remove(transport);
+                        }
+                    }
+                }
+            }
+        }
 
 		/// <summary>
 		/// Метод заполнения таблицы "Список транспорта".
